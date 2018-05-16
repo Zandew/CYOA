@@ -117,6 +117,7 @@ boss = pokemon('Meowth', 55, 14, 'psychic')
 
 wildlist = [wild1, wild2, wild3, wild4, wild5, wild6, wild7]
 guardlist = [guard1, guard2, guard3]
+
 dialoguelist = ['I am sure you must be wondering why you have been sent here. \
 Well I, Guardone cannot give you the answer. If you feel that you must escape, \
 then you will have to defeat my Vaporeon with your own skill!', 'Impressive \
@@ -125,12 +126,14 @@ send you back!', 'YOU HAVE SOME NERVE TRYING TO BEAT US! DO YOU REALLY THINK \
 WE WILL JUST BACK DOWN TO A FIGHT? WELL I, GUARDTHREE WILL BURN YOUR POKEMON \
 WITH MY FLAREON! THAT POKEMON OF YOURS IS VERY IMPORTANT TO US, BUT IF YOU \
 DO NOT BACK OFF WE WILL HAVE NO CHOICE!']
+
 bossdialogue=['Jessie: I’m sure you are wondering why you were brought here. To show respect for your skill, \
 we shall explain.','James: That pokemon of yours has a very special ability that we, Team Rocket would like to have. \
 That ability is being able to grow exponentially fast through the use of pokemon battles.','Meowth: You have the only other \
 pokemon than me that has this ability. We absolutely cannot let you have it.','Jessie:Your friends, they have no idea what has \
 happened to you. Your family as well. They would never believe you anyways, so do not try to defy us. You have barely known that \
 pokemon anyways, so if you do not mind, we will take that pokemon by force.']
+
 endingdialogue=['Jessie: So you have beaten us... That must be a true testament of your skill.','James: It appears like we will \
 have to let you go for now, but know that there are much more dangerous groups out there targeting your pokemon and its ability.'\
 ,'Meowth: You must continue to get stronger. I can tell that your pokemon knows this as well. We have the resources to help you \
@@ -148,7 +151,6 @@ def room1():#Where you can level up your pokemon, then you go into the guard roo
          print ('While you are taking the bridge, the bridge collapses, you fall down the hole and find a wild pokemon!!')
          wildencounter()
          print ('Luckily there is a ladder going up the hole, you take the ladder and reach the other side')
-         
     else:
          print ('You crossed the hole safely!')
     pokecenter()
