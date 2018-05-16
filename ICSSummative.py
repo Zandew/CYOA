@@ -32,8 +32,7 @@ class pokemon():
         print(5-health,'points were allocated into attack. ')
         self.hp += health
         self.maxattack += 5-health
-
-
+        
     def heal(self):
         self.hp = self.maxhp
 
@@ -48,59 +47,12 @@ super effective on grass! There are also pokemon with no type that are only supe
 effective against other pokemon with no type. Type super effectiveness \
 increases damage!']
 
-gameinfo2 =gameinfo2 = ['You have waken up in a room with no apparent exit other than two doors','You have no idea what \
+gameinfo2 = ['You have waken up in a room with no apparent exit other than two doors','You have no idea what \
 has happened, only that you were on your way to the prestigeous Pokemon Academy for \
 your first day of middle school with your very first pokemon.', 'Now, you appear to be in a locked room and only have that \
 pokemon with you to help you escape. While thinking about this situation, you can not help but wonder; why did this happen \
 to me? Where do these doors lead? How could I have ever ended up in this situation...']
-
-def room1():#Where you can level up your pokemon, then you go into the guard room.
-    print('Here you can level up your pokemon if you win a battle.')
-    wildencounter()
-    print ('You come across a huge hole and the only ways to get across are to walk over an old \
-    bridge or to walk around the hole')
-    print ('Do you take the bridge or walk around the hole?')
-    command = input().lower()
-    if 'bridge' in command:
-         print ('While you are taking the bridge, the bridge collapses, you fall down the hole and find a wild pokemon!!')
-         wildencounter()
-         print ('Luckily there is a ladder going up the hole, you take the ladder and reach the other side')
-         
-    else:
-         print ('You crossed the hole safely!')
-    pokecenter()
-    guardroom()        
         
-def room2():#Where you can level up your pokemon
-    print('Here you can level up your pokemon if you win a battle.')
-    wildencounter()
-    print ('Looks like this room is a dead end!')
-    print('You arrived back at the starting room!')
-    startingroom()
-       
-def startingroom(): #This is the first room players end up in
-    command=input('Both rooms look like they contain wild pokemon. Turn left or right?: ')
-    if 'left' in command:
-        room1()
-    elif 'right' in command:
-        room2()
-    else:
-        print('Please enter a valid direction!')
-        startingroom()
-        
-def pokecenter():
-    command = input('It looks like there is a Pokemon Center nearby, do you want to heal your pokemon?').lower()
-    if 'yes' in command:
-    	print ('Hello, and welcome to the Pokémon Center. We will heal your pokemon to full health.')
-    	starterpokemon.heal()
-    	print ('Please come again!')
-        
-def guardroom():
-    print('This is the guard room! You have to face 3 pokemon back to back!')
-    guardbattle()
-    pokecenter()
-    bossbattle()
-    
 def getstarterpokemon():
     starterpokemonname=input("Enter your pokemon name: ") #Players can choose their pokemon's name
     ptype=0 #arbitrary value to enter the while loop
@@ -184,6 +136,53 @@ have to let you go for now, but know that there are much more dangerous groups o
 ,'Meowth: You must continue to get stronger. I can tell that your pokemon knows this as well. We have the resources to help you \
 train but know that we are being targeted by some very dangerous organizations as well. Our deal is that we will help you train \
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
+
+def room1():#Where you can level up your pokemon, then you go into the guard room.
+    print('Here you can level up your pokemon if you win a battle.')
+    wildencounter()
+    print ('You come across a huge hole and the only ways to get across are to walk over an old \
+    bridge or to walk around the hole')
+    print ('Do you take the bridge or walk around the hole?')
+    command = input().lower()
+    if 'bridge' in command:
+         print ('While you are taking the bridge, the bridge collapses, you fall down the hole and find a wild pokemon!!')
+         wildencounter()
+         print ('Luckily there is a ladder going up the hole, you take the ladder and reach the other side')
+         
+    else:
+         print ('You crossed the hole safely!')
+    pokecenter()
+    guardroom()        
+        
+def room2():#Where you can level up your pokemon
+    print('Here you can level up your pokemon if you win a battle.')
+    wildencounter()
+    print ('Looks like this room is a dead end!')
+    print('You arrived back at the starting room!')
+    startingroom()
+       
+def startingroom(): #This is the first room players end up in
+    command=input('Both rooms look like they contain wild pokemon. Turn left or right?: ')
+    if 'left' in command:
+        room1()
+    elif 'right' in command:
+        room2()
+    else:
+        print('Please enter a valid direction!')
+        startingroom()
+        
+def pokecenter():
+    command = input('It looks like there is a Pokemon Center nearby, do you want to heal your pokemon?').lower()
+    if 'yes' in command:
+    	print ('Hello, and welcome to the Pokémon Center. We will heal your pokemon to full health.')
+    	starterpokemon.heal()
+    	print ('Please come again!')
+        
+def guardroom():
+    print('This is the guard room! You have to face 3 pokemon back to back!')
+    guardbattle()
+    pokecenter()
+    bossbattle()
 
 def wildencounter():
     index = random.randint(0, 6)
