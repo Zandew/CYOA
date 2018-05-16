@@ -23,6 +23,34 @@ class NPC():
     command = input('Accept Quest?(Enter Yes or No)').lower()
     if command == 'yes':
       self.sidequest.start_sidequest()
+                                                   
+ class pokemon():
+
+    def __init__(self, name, hp, attack, type, sidequest=None):
+        self.maxhp = hp
+        self.name = name
+        self.hp = hp
+        self.maxattack = attack
+        self.type = type
+        self.sidequest = sidequest #New attribute sidequest
+
+    @property
+    def minattack(self):
+        return round(self.maxattack*0.7)
+        
+    def levelup(self):
+        print ('{} leveled up!'.format(self.name))
+        print ('You have gained 5 stat points! ')
+        health = int(input("How many stats do you want to allocate into HP?"))
+        while health<0 or health>5:
+            print('This is not a valid increase in health!')
+            health = int(input("How many stats do you want to allocate into HP?"))
+        print(5-health,'points were allocated into attack. ')
+        self.hp += health
+        self.maxattack += 5-health
+        
+    def heal(self):
+        self.hp = self.maxhp                                                  
       
       
                     
