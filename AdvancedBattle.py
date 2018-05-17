@@ -27,7 +27,7 @@ class wildpokemon(pokemon):
     def minattack(self):
         return round(self.maxattack*0.7)
 
-  def attack(self, enemy):
+    def attack(self, enemy):
         attack = random.randint(self.minattack, self.maxattack)
         enemy.hp = enemy.hp-attack
         if enemy.hp<=0:
@@ -39,11 +39,11 @@ class wildpokemon(pokemon):
         
 class starterpokemon(pokemon):
   
-  def __init__(self, name, maxhp, type):
+    def __init__(self, name, maxhp, type):
         super().__init__(name, maxhp, type)
         self.moves = [tackle.name, heal.name]
         
-  def attack(self, enemy):
+    def attack(self, enemy):
         print ('It is your turn!')
         print ('What move do you want {} to use?!'.format(self.name))
         print ('--------------------')
@@ -74,12 +74,12 @@ class starterpokemon(pokemon):
             if self.hp>self.maxhp:
                 self.hp = self.maxhp
 
-  def level_up(self):
+    def level_up(self):
         print ('{} leveled up!'.format(self.name))
         print ('You have gained 3 hp points! ')
         self.maxhp += health
 
-  def heal(self):
+    def heal(self):
         self.hp = self.maxhp
         
 pikachu = starterpokemon('pikachu', '10', 'water')
