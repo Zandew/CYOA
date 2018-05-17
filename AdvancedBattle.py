@@ -1,34 +1,11 @@
 import random
 class pokemon():
 
-    def __init__(self, name, hp, attack, type):
+    def __init__(self, name, maxhp, type):
         self.name = name
-        self.hp = hp
-        self.maxattack = attack
-        self.maxhp = hp
+        self.hp = maxhp
+        self.maxhp = maxhp
         self.type = type
-
-    @property
-    def minattack(self):
-        return round(self.maxattack*0.7)
-        
-    def attack(self, enemy):
-        attack = random.randint(self.minattack, self.maxattack)
-        enemy.hp = enemy.hp-attack
-        if enemy.hp<=0:
-            print ('{} has knocked out {}'.format(self.name, enemy.name))
-            return True
-        else:
-            print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
-            return False
-        
-    def level_up(self):
-        print ('{} leveled up!'.format(self.name))
-        print ('You have gained 3 hp points! ')
-        self.maxhp += health
-        
-    def heal(self):
-        self.hp = self.maxhp
         
 class specialmove():
     
@@ -39,11 +16,31 @@ class specialmove():
         
 tackle = specialmove('tackle', 'damage', 7)
 heal = specialmove('heal', 'heal', 7)
+
+class wildpokemon(pokemon):
+
+    def __init__(self, name, maxhp, maxattack, type):
+        super().__init__(name, maxhp, type)
+        self.maxattack = maxattack
+
+    @property
+    def minattack(self):
+        return round(self.maxattack*0.7)
+
+  def attack(self, enemy):
+        attack = random.randint(self.minattack, self.maxattack)
+        enemy.hp = enemy.hp-attack
+        if enemy.hp<=0:
+            print ('{} has knocked out {}'.format(self.name, enemy.name))
+            return True
+        else:
+            print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
+            return False
         
 class starterpokemon(pokemon):
   
   def __init__(self, name, maxhp, type):
-        pokemon.__init__(self, name, maxhp, type)
+        super().__init__(name, maxhp, type)
         self.moves = [tackle.name, heal.name]
         
   def attack(self, enemy):
@@ -56,6 +53,7 @@ class starterpokemon(pokemon):
         while True:
             move = input().lower()
             if move not in self.moves:
+                print ('Enter a valid move!')
                 continue
             print ('{} used {}!'.format(self.name, move))
         if move.type == 'damage':
@@ -75,8 +73,17 @@ class starterpokemon(pokemon):
             self.hp += heal
             if self.hp>self.maxhp:
                 self.hp = self.maxhp
+
+  def level_up(self):
+        print ('{} leveled up!'.format(self.name))
+        print ('You have gained 3 hp points! ')
+        self.maxhp += health
+
+  def heal(self):
+        self.hp = self.maxhp
+        
 pikachu = starterpokemon('pikachu', '10', 'water')
-bulbasaur = pokemon('bulbasaur', '20', '2', 'grass')
+bulbasaur = wildpokemon('bulbasaur', '20', '2', 'grass')
 pikachu.attack('bulbasaur')
             
             
