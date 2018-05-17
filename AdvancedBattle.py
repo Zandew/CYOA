@@ -24,14 +24,8 @@ class pokemon():
         
     def level_up(self):
         print ('{} leveled up!'.format(self.name))
-        print ('You have gained 5 stat points! ')
-        health = int(input("How many stats do you want to allocate into HP?"))
-        while health<0 or health>5:
-            print('This is not a valid increase in health!')
-            health = int(input("How many stats do you want to allocate into HP?"))
-        print(5-health,'points were allocated into attack. ')
-        self.hp += health
-        self.maxattack += 5-health
+        print ('You have gained 3 hp points! ')
+        self.maxhp += health
         
     def heal(self):
         self.hp = self.maxhp
@@ -49,9 +43,7 @@ heal = specialmove('heal', 'heal', 7)
 class starterpokemon(pokemon):
   
   def __init__(self, name, maxhp, type):
-        self.name = name
-        self.maxhp = maxhp
-        self.type = type
+        pokemon.__init__(self, name, maxhp, type)
         self.moves = [tackle.name, heal.name]
         
   def attack(self, enemy):
