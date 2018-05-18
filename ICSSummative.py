@@ -11,32 +11,111 @@ import sys
 
 class pokemon():
 
-    def __init__(self, name, hp, attack, type):
-        self.maxhp = hp
+    def __init__(self, name, maxhp, type):
         self.name = name
-        self.hp = hp
-        self.maxattack = attack
+        self.hp = maxhp
+        self.maxhp = maxhp
         self.type = type
+        
+effectivedict = {'water': ['fire'],
+                 'fire': ['grass'],
+                 'grass': ['water'],
+                 'None': ['None'],
+                 'psychic': ['fire', 'water', 'grass', 'None']}
+    
+def is_effective(pokemon1, pokemon2):
+    if pokemon2.type in effectivedict[pokemon1.type]:
+        return True
+    return False    
+
+class specialmove():
+    
+    def __init__(self, name, type, amount):
+        self.name = name
+        self.type = type
+        self.amount = amount
+        
+    def __str__(self):
+        return self.name
+                
+tackle = specialmove('tackle', 'damage', 7)
+heal = specialmove('heal', 'heal', 7)
+
+class wildpokemon(pokemon):
+
+    def __init__(self, name, maxhp, maxattack, type):
+        super().__init__(name, maxhp, type)
+        self.maxattack = maxattack
+        self.hp = maxhp
 
     @property
     def minattack(self):
         return round(self.maxattack*0.7)
+
+    def attack(self, enemy):
+        attack = random.randint(self.minattack, self.maxattack)
+        enemy.hp = enemy.hp-attack
+        if enemy.hp<=0:
+            print ('{} has knocked out {}'.format(self.name, enemy.name))
+            return True
+        else:
+            print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
+            return False
         
-    def levelup(self):
+class starterpokemon(pokemon):
+  
+    def __init__(self, name, maxhp, type):
+        super().__init__(name, maxhp, type)
+        self.moves = [tackle, heal]
+        self.movenames = [tackle.name, heal.name]
+
+        
+    def attack(self, enemy):
+        print ('It is your turn!')
+        print ('What move do you want {} to use?!'.format(self.name))
+        print ('--------------------')
+        for move in self.moves:
+            print (move)
+        print ('--------------------')
+        while True:
+            move = input().lower()
+            if move not in self.movenames:
+                print ('Enter a valid move!')
+                continue
+            print ('{} used {}!'.format(self.name, move))
+            break
+        for x in range(len(self.moves)):
+            if move == self.moves[x].name:
+                index = x
+                break
+        move = self.moves[index]
+        if move.type == 'damage':
+            attack = move.amount
+            if is_effective(self, enemy):
+                attack += 2
+            enemy.hp = enemy.hp-attack
+            if enemy.hp<=0:
+                print ('{} has knocked out {}'.format(self.name, enemy.name))
+                return True
+            else:
+                print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
+                return False 
+        if move.type == 'heal':
+            heal = move.amount
+            print ('{} has healed for {}!'.format(self.name, heal))
+            self.hp += heal
+            if self.hp>self.maxhp:
+                self.hp = self.maxhp
+
+    def level_up(self):
         print ('{} leveled up!'.format(self.name))
-        print ('You have gained 5 stat points! ')
-        health = int(input("How many stats do you want to allocate into HP?"))
-        while health<0 or health>5:
-            print('This is not a valid increase in health!')
-            health = int(input("How many stats do you want to allocate into HP?"))
-        print(5-health,'points were allocated into attack. ')
-        self.hp += health
-        self.maxattack += 5-health
-        
+        print ('You have gained 3 hp points! ')
+        self.maxhp += 3
+
     def heal(self):
         self.hp = self.maxhp
 
-gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat\
+gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat \
 the boss and escape the locked room.', 'You have to escape by battling pokemon.\
 If you beat all the guards, you can face the boss!', 'Each pokemon has health and attack stats. The attack stat is split up\
 between minimum and maximum attack stats. The minimum attack \
@@ -61,7 +140,7 @@ def getstarterpokemon():
         ptype=input("Enter your pokemon's type (fire,water,grass): ").lower()#Players choose their pokemon's type
         if ptype not in types:
             print('Not a valid type! Enter either fire, water or grass exactly.')#If an invalid type, ask for the type again
-    starterpokemon=pokemon(starterpokemonname,50,10,ptype)
+    starterpokemon = starterpokemon(starterpokemonname, 50, ptype)
 
 #Shows what type each type is effective against.
 effectivedict = {'water': ['fire'],
@@ -74,46 +153,35 @@ def is_effective(pokemon1, pokemon2):
     if pokemon2.type in effectivedict[pokemon1.type]:
         return True
     return False
-    
-def attack(pokemon1, pokemon2):
-    attack = random.randint(pokemon1.minattack, pokemon1.maxattack)
-    if is_effective(pokemon1, pokemon2):
-        attack += 2
-    pokemon2.hp = pokemon2.hp-attack
-    print (pokemon1.name, 'has attacked', pokemon2.name, 'for', attack, 'damage')
-    if pokemon2.hp<0:
-        print (pokemon1.name, 'has knocked out', pokemon2.name)
-        return False
-    
+       
 def battle(pokemon1, pokemon2):
     if is_effective(pokemon1, pokemon2):
         print ('{} has a type advantage over {}!'.format(pokemon1.name, pokemon2.name))
     elif is_effective(pokemon2, pokemon1):
         print ('{} has a type advantage over {}!'.format(pokemon2.name, pokemon1.name))
-    x = True
-    while x !=False:
-        x = attack(pokemon1, pokemon2)
-        if x==False:
-            pokemon1.levelup()
+    while True:
+        x = pokemon1.attack(pokemon2)
+        if x==True:
+            pokemon1.level_up()
             return True
             break
-        x = attack(pokemon2, pokemon1)
-        if x==False:
+        x = pokemon2.attack(pokemon1)
+        if x==True:
             print ('{} fainted!'.format(starterpokemon.name))
             print ( "YOU LOSE")
             sys.exit()
 
-wild1 = pokemon('Bidoof', random.randint(30, 40), 8,'None')
-wild2 = pokemon('Poliwag', random.randint(40, 45), 7, 'water')
-wild3 = pokemon('Magikarp', random.randint(30, 35), 5, 'water')
-wild4 = pokemon('Growlithe', random.randint(45, 50), 8, 'fire')
-wild5 = pokemon('Vulpix', random.randint(40, 50), 7, 'fire')
-wild6 = pokemon('Oddish', random.randint(30, 45), 6, 'grass')
-wild7 = pokemon('Tangela', random.randint(40, 50), 7, 'grass')
-guard1 = pokemon('Vaporeon', 45, 10, 'water')
-guard2 = pokemon('Leafeon', 40, 11, 'grass')
-guard3 = pokemon('Flareon', 45, 11, 'fire')
-boss = pokemon('Meowth', 55, 14, 'psychic')
+wild1 = wildpokemon('Bidoof', random.randint(30, 40), 8,'None')
+wild2 = wildpokemon('Poliwag', random.randint(40, 45), 7, 'water')
+wild3 = wildpokemon('Magikarp', random.randint(30, 35), 5, 'water')
+wild4 = wildpokemon('Growlithe', random.randint(45, 50), 8, 'fire')
+wild5 = wildpokemon('Vulpix', random.randint(40, 50), 7, 'fire')
+wild6 = wildpokemon('Oddish', random.randint(30, 45), 6, 'grass')
+wild7 = wildpokemon('Tangela', random.randint(40, 50), 7, 'grass')
+guard1 = wildpokemon('Vaporeon', 45, 10, 'water')
+guard2 = wildpokemon('Leafeon', 40, 11, 'grass')
+guard3 = wildpokemon('Flareon', 45, 11, 'fire')
+boss = wildpokemon('Meowth', 55, 14, 'psychic')
 
 wildlist = [wild1, wild2, wild3, wild4, wild5, wild6, wild7]
 guardlist = [guard1, guard2, guard3]
