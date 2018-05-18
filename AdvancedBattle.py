@@ -7,6 +7,17 @@ class pokemon():
         self.maxhp = maxhp
         self.type = type
         
+effectivedict = {'water': ['fire'],
+                 'fire': ['grass'],
+                 'grass': ['water'],
+                 'None': ['None'],
+                 'psychic': ['fire', 'water', 'grass', 'None']}
+    
+def is_effective(pokemon1, pokemon2):
+    if pokemon2.type in effectivedict[pokemon1.type]:
+        return True
+    return False    
+
 class specialmove():
     
     def __init__(self, name, type, amount):
@@ -14,6 +25,9 @@ class specialmove():
         self.type = type
         self.amount = amount
         
+    def __str__(self):
+        return self.name
+                
 tackle = specialmove('tackle', 'damage', 7)
 heal = specialmove('heal', 'heal', 7)
 
@@ -22,6 +36,7 @@ class wildpokemon(pokemon):
     def __init__(self, name, maxhp, maxattack, type):
         super().__init__(name, maxhp, type)
         self.maxattack = maxattack
+        self.hp = maxhp
 
     @property
     def minattack(self):
@@ -41,7 +56,9 @@ class starterpokemon(pokemon):
   
     def __init__(self, name, maxhp, type):
         super().__init__(name, maxhp, type)
-        self.moves = [tackle.name, heal.name]
+        self.moves = [tackle, heal]
+        self.movenames = [tackle.name, heal.name]
+
         
     def attack(self, enemy):
         print ('It is your turn!')
@@ -52,12 +69,18 @@ class starterpokemon(pokemon):
         print ('--------------------')
         while True:
             move = input().lower()
-            if move not in self.moves:
+            if move not in self.movenames:
                 print ('Enter a valid move!')
                 continue
             print ('{} used {}!'.format(self.name, move))
+            break
+        for x in range(len(self.moves)):
+            if move == self.moves[x].name:
+                index = x
+                break
+        move = self.moves[index]
         if move.type == 'damage':
-            attack = move1.amount
+            attack = move.amount
             if is_effective(self, enemy):
                 attack += 2
             enemy.hp = enemy.hp-attack
@@ -68,7 +91,7 @@ class starterpokemon(pokemon):
                 print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
                 return False 
         if move.type == 'heal':
-            heal = move1.amount
+            heal = move.amount
             print ('{} has healed for {}!'.format(self.name, heal))
             self.hp += heal
             if self.hp>self.maxhp:
@@ -82,9 +105,9 @@ class starterpokemon(pokemon):
     def heal(self):
         self.hp = self.maxhp
         
-pikachu = starterpokemon('pikachu', '10', 'water')
-bulbasaur = wildpokemon('bulbasaur', '20', '2', 'grass')
-pikachu.attack('bulbasaur')
+pikachu = starterpokemon('pikachu', 10, 'water')
+bulbasaur = wildpokemon('bulbasaur', 20, 2, 'grass')
+pikachu.attack(bulbasaur)
             
             
         
