@@ -115,8 +115,8 @@ class starterpokemon(pokemon):
     def heal(self):
         self.hp = self.maxhp
 
-gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat\
-the boss and escape the locked room.', 'You have to escape by battling pokemon.\
+gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat \
+the boss and escape the locked room.', 'You have to escape by battling pokemon. \
 If you beat all the guards, you can face the boss!', 'When you beat a pokemon, \
 you level up gaining 3 health points. Other pokemon attack within a range, but \
 your pokemon is special where it can have different attacks that do different \
