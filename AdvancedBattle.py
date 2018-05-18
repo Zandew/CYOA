@@ -101,7 +101,7 @@ class starterpokemon(pokemon):
     def level_up(self):
         print ('{} leveled up!'.format(self.name))
         print ('You have gained 3 hp points! ')
-        self.maxhp += health
+        self.maxhp += 3
 
     def heal(self):
         self.hp = self.maxhp
