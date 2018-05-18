@@ -141,7 +141,7 @@ def getstarterpokemon():
         ptype=input("Enter your pokemon's type (fire,water,grass): ").lower()#Players choose their pokemon's type
         if ptype not in types:
             print('Not a valid type! Enter either fire, water or grass exactly.')#If an invalid type, ask for the type again
-    starterpokemon = starter_pokemon(starterpokemonname, 50, ptype)
+    return starter_pokemon(starterpokemonname, 50, ptype)
 
 #Shows what type each type is effective against.
 effectivedict = {'water': ['fire'],
@@ -280,10 +280,11 @@ def bossbattle():
     endingscene()
     
 def main():
+    global starterpokemon
     for dialogue in gameinfo1:
         print (dialogue)
         time.sleep(5)
-    getstarterpokemon()
+    starterpokemon = getstarterpokemon()
     for dialogue in gameinfo2:
         print (dialogue)
         time.sleep(3)
