@@ -1,22 +1,7 @@
-# CYOA
 ICS Summative
-
-The proposal will include an overall description of the game your team would like to create.
-
-Each person is responsible for writing a section on their own level. This section should include detailed descriptions of the rules of the game, actions the player can take, etc. It should also include screen sketches and a flowchart to show the general flow of the level.
-
-There should also be a schedule with a list of goals and the dates that they should be completed by.
-
-
-Our game is a choose your own adventure story where you start off with a pokemon partner. You have to try and beat the final boss by going through rooms and battling wild pokemon and guards. You can get extra moves by completing sidequests and exploring areas. 
-
-Each pokemon has health and attack stats. Your pokemon goes first, and you attack your pokemon based on your attack stat. Each attack does between 0.7 and 1 times the max attack. If your health goes to 0 before the opponents' does, you lose.
-
-You take sidequests from an NPC.
-
-Schedule:
-  Complete story-May 18th
-  Complete sidequests-May 25th
-  Complete Battling system-May 25th
- 
-Flowchart: (cant put google doc image here)
+Our game is a choose your own adventure story where you start off with a pokemon partner. You have to try and beat the final boss and understand how you first got locked in the room by going through rooms and battling wild pokemon and guards. You can get extra moves by completing sidequests and exploring areas.
+Each wild pokemon has health and attack stats, while you only have health stats. Wild pokemon do damage based on their attack stat from 0.7 to 1 times their attack stat. Your pokemon starts off with a regular attack tackle and a healing move. You can choose either of these moves each turn. You can obtain more moves as you complete sidequests, giving you stronger attacks or powerups or extra abilities. If your health goes to 0 before the opponents' does, you lose.
+You take sidequests from an NPC. These can be finding a pokemon or exploring an area. Completing sidequests give you extra moves or items or even another pokemon.  
+Schedule: Complete story-May 25th Complete sidequests-June 1st Complete Battling system-June 1st
+Flowchart:  
+You first start in the starting room. You have your first pokemon, and you have the choice to go through two rooms. One room brings you back to the start after battling a wild pokemon, while the other room has you battle a wild pokemon and then you can heal fully at a pokemon centre. Then, you have to face a guard battle, facing 3 guard pokemon at once. After, you can heal fully at the pokemon centre to face the final boss battle, which is the final battle in the game.
