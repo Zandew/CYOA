@@ -1,4 +1,5 @@
 import random
+import sys
 class pokemon():
 
     def __init__(self, name, maxhp, type):
@@ -105,9 +106,26 @@ class starterpokemon(pokemon):
     def heal(self):
         self.hp = self.maxhp
         
+def battle(pokemon1, pokemon2):
+    if is_effective(pokemon1, pokemon2):
+        print ('{} has a type advantage over {}!'.format(pokemon1.name, pokemon2.name))
+    elif is_effective(pokemon2, pokemon1):
+        print ('{} has a type advantage over {}!'.format(pokemon2.name, pokemon1.name))
+    while True:
+        x = pokemon1.attack(pokemon2)
+        if x==True:
+            pokemon1.level_up()
+            return True
+            break
+        x = pokemon2.attack(pokemon1)
+        if x==True:
+            print ('{} fainted!'.format(starterpokemon.name))
+            print ( "YOU LOSE")
+            sys.exit()        
+        
 pikachu = starterpokemon('pikachu', 10, 'water')
-bulbasaur = wildpokemon('bulbasaur', 20, 2, 'grass')
-pikachu.attack(bulbasaur)
+bulbasaur = wildpokemon('bulbasaur', 20, 3, 'grass')
+battle(pikachu, bulbasaur)
             
             
         
