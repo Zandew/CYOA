@@ -62,7 +62,7 @@ class wildpokemon(pokemon):
             print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
             return False
         
-class starterpokemon(pokemon):
+class starter_pokemon(pokemon):
   
     def __init__(self, name, maxhp, type):
         super().__init__(name, maxhp, type)
@@ -141,7 +141,7 @@ def getstarterpokemon():
         ptype=input("Enter your pokemon's type (fire,water,grass): ").lower()#Players choose their pokemon's type
         if ptype not in types:
             print('Not a valid type! Enter either fire, water or grass exactly.')#If an invalid type, ask for the type again
-    starterpokemon = starterpokemon(starterpokemonname, 50, ptype)
+    starterpokemon = starter_pokemon(starterpokemonname, 50, ptype)
 
 #Shows what type each type is effective against.
 effectivedict = {'water': ['fire'],
