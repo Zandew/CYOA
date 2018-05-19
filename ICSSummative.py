@@ -102,8 +102,8 @@ class starter_pokemon(pokemon):
                 return False 
         if move.type == 'heal':
             heal = move.amount
-            print ('{} has healed for {}!'.format(self.name, heal))
-            self.hp += heal
+            print ('{} has healed for {}!'.format(self.name, self.hp*heal))
+            self.hp += round(self.hp*heal)
             if self.hp>self.maxhp:
                 self.hp = self.maxhp
 
