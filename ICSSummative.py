@@ -39,7 +39,7 @@ class specialmove():
         return self.name
                 
 tackle = specialmove('tackle', 'damage', 7)
-heal = specialmove('heal', 'heal', 7)
+heal = specialmove('heal', 'heal', 0.15)
 
 class wildpokemon(pokemon):
 
