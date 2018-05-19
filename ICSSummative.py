@@ -156,10 +156,10 @@ def is_effective(pokemon1, pokemon2):
     return False
        
 def battle(pokemon1, pokemon2):
-    print('___  __ )__    |__  __/__  __/__  /___  ____/')
-    print('__  __  |_  /| |_  /  __  /  __  / __  __/   ')  
-    print('_  /_/ /_  ___ |  /   _  /   _  /___  /___   ')
-    print('/_____/ /_/  |_/_/    /_/    /_____/_____/   \n')
+    print('   / __ )   /   |   /__  __/__  __/ /  /     /  ___/')
+    print('  / __  |  / /| |    / /    / /    /  /     /  __/   ')  
+    print(' / /_/ /  / ___ |   / /    / /    /  /___  /  /___   ')
+    print('/_____/  /_/  |_/  /_/    /_/    /_____/  /_____/   ')
     print('{} versus {}!'.format(pokemon1.name.upper(), pokemon2.name.upper()))
     if is_effective(pokemon1, pokemon2):
         print ('{} has a type advantage over {}!'.format(pokemon1.name, pokemon2.name))
