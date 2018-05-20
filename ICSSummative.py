@@ -102,10 +102,9 @@ class starter_pokemon(pokemon):
                 return False 
         if move.type == 'heal':
             heal = move.amount
-            print ('{} has healed for {}!'.format(self.name, self.hp*heal))
-            self.hp += round(self.hp*heal)
-            if self.hp>self.maxhp:
-                self.hp = self.maxhp
+            heal = round((self.maxhp-self.hp)*heal)
+            print ('{} has healed for {}!'.format(self.name, heal))
+            self.hp += heal
 
     def level_up(self):
         print ('{} leveled up!'.format(self.name))
@@ -156,9 +155,9 @@ def is_effective(pokemon1, pokemon2):
     return False
        
 def battle(pokemon1, pokemon2):
-    print('   / __ )   /   |   /__  __/__  __/ /  /     /  ___/')
+    print('   / __  )  /   |   /__  __/__  __/ /  /     /  ___/')
     print('  / __  |  / /| |    / /    / /    /  /     /  __/   ')  
-    print(' / /_/ /  / ___ |   / /    / /    /  /___  /  /___   ')
+    print(' / /_/ )  / ___ |   / /    / /    /  /___  /  /__   ')
     print('/_____/  /_/  |_/  /_/    /_/    /_____/  /_____/   ')
     print('{} versus {}!'.format(pokemon1.name.upper(), pokemon2.name.upper()))
     if is_effective(pokemon1, pokemon2):
@@ -217,8 +216,7 @@ your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 def room1():#Where you can level up your pokemon, then you go into the guard room.
     print('Here you can level up your pokemon if you win a battle.')
     wildencounter()
-    print ('You come across a huge hole and the only ways to get across are to walk over an old \
-    bridge or to walk around the hole')
+    print ('You come across a huge hole and the only ways to get across are to walk over an old bridge or to walk around the hole')
     print ('Do you take the bridge or walk around the hole?')
     command = input().lower()
     if 'bridge' in command:
@@ -228,7 +226,9 @@ def room1():#Where you can level up your pokemon, then you go into the guard roo
     else:
          print ('You crossed the hole safely!')
     pokecenter()
-    guardroom()        
+    guardroom()
+
+        
         
 def room2():#Where you can level up your pokemon
     print('Here you can level up your pokemon if you win a battle.')
@@ -264,6 +264,7 @@ def wildencounter():
     index = random.randint(0, 6)
     wild = wildlist[index]
     print ('A wild {} appeared!'.format(wild.name))
+    time.sleep(1)
     battle(starterpokemon, wild)
 
 def guardbattle():
