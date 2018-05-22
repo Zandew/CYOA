@@ -101,7 +101,7 @@ class starter_pokemon(pokemon):
                
     def attack(self, enemy):
         print ('It is your turn!')
-        move = choose_move()
+        move = self.choose_move()
         if isinstance(move, specialmove):
             while True:
                 if move.pp>0:
@@ -115,7 +115,7 @@ class starter_pokemon(pokemon):
                         break
                 else:
                     print ("You have no pp left for {}! Enter another move!".format(move))
-                    move = choose_move()
+                    move = self.choose_move()
         else:        
             if move.type == 'damage':
                 attack = move.amount
