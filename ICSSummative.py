@@ -41,10 +41,12 @@ class basicmove():
     def __str__(self):
         return self.name
     
-class specialmove(basicmove):
+class specialmove():
    
     def __init__(self, name, type, amount, pp):
-        super().__init(name, type, amount)
+        self.name = name
+        self.type = type
+        self.amount = amount
         self.pp = pp
             
                 
@@ -90,25 +92,26 @@ class starter_pokemon(pokemon):
             if move not in self.movenames:
                 print ('Enter a valid move!')
                 continue
-            return move
-               
-    def attack(self, enemy):
-        print ('It is your turn!')
-        move = choose_move()
         for x in range(len(self.moves)):
             if move == self.moves[x].name:
                 index = x
                 break
         move = self.moves[index]
+        return move
+               
+    def attack(self, enemy):
+        print ('It is your turn!')
+        move = choose_move()
         if isinstance(move, specialmove):
             while True:
                 if move.pp>0:
                     if move.type == 'heal':
                         heal = move.amount
-                        heal = round((self.maxhp-self.hp)*heal)
                         print ('{} has healed for {}!'.format(self.name, heal))
                         self.hp += heal
                         move.pp -= 1
+                        if self.hp>self.maxhp:
+                            self.hp = self.maxhp
                         break
                 else:
                     print ("You have no pp left for {}! Enter another move!".format(move))
