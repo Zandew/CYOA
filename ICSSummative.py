@@ -100,8 +100,8 @@ class starter_pokemon(pokemon):
                 index = x
                 break
         move = self.moves[index]
-        if is_instance(move, specialmove):
-            while true:
+        if isinstance(move, specialmove):
+            while True:
                 if move.pp>0:
                     if move.type == 'heal':
                         heal = move.amount
