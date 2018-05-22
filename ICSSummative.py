@@ -108,7 +108,7 @@ class starter_pokemon(pokemon):
                         heal = round((self.maxhp-self.hp)*heal)
                         print ('{} has healed for {}!'.format(self.name, heal))
                         self.hp += heal
-                        pp -= 1
+                        move.pp -= 1
                         break
                 else:
                     print ("You have no pp left for {}! Enter another move!".format(move))
