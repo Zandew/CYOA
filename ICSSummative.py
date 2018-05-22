@@ -17,6 +17,9 @@ class pokemon():
         self.maxhp = maxhp
         self.type = type
         
+    def heal(self):
+        self.hp = self.maxhp
+        
 effectivedict = {'water': ['fire'],
                  'fire': ['grass'],
                  'grass': ['water'],
@@ -110,9 +113,6 @@ class starter_pokemon(pokemon):
         print ('{} leveled up!'.format(self.name))
         print ('You have gained 3 hp points! ')
         self.maxhp += 3
-
-    def heal(self):
-        self.hp = self.maxhp
 
 gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat \
 the boss and escape the locked room.', 'You have to escape by battling pokemon. \
@@ -266,6 +266,7 @@ def wildencounter():
     print ('A wild {} appeared!'.format(wild.name))
     time.sleep(1)
     battle(starterpokemon, wild)
+    wild.heal()
 
 def guardbattle():
     for guard, dialogue in zip(guardlist, dialoguelist):
