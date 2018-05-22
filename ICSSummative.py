@@ -31,7 +31,7 @@ def is_effective(pokemon1, pokemon2):
         return True
     return False    
 
-class specialmove():
+class basicmove():
     
     def __init__(self, name, type, amount):
         self.name = name
@@ -40,9 +40,16 @@ class specialmove():
         
     def __str__(self):
         return self.name
+    
+class specialmove(basicmove):
+   
+    def __init__(self, name, type, amount, pp):
+        super().__init(name, type, amount)
+        self.pp = pp
+            
                 
-tackle = specialmove('tackle', 'damage', 7)
-heal = specialmove('heal', 'heal', 0.15)
+tackle = basicmove('tackle', 'damage', 7)
+heal = specialmove('heal', 'heal', 15, 10)
 
 class wildpokemon(pokemon):
 
@@ -72,9 +79,7 @@ class starter_pokemon(pokemon):
         self.moves = [tackle, heal]
         self.movenames = [tackle.name, heal.name]
 
-        
-    def attack(self, enemy):
-        print ('It is your turn!')
+    def choose_move(self):
         print ('What move do you want {} to use?!'.format(self.name))
         print ('--------------------')
         for move in self.moves:
@@ -85,29 +90,41 @@ class starter_pokemon(pokemon):
             if move not in self.movenames:
                 print ('Enter a valid move!')
                 continue
-            print ('{} used {}!'.format(self.name, move))
-            break
+            return move
+               
+    def attack(self, enemy):
+        print ('It is your turn!')
+        move = choose_move()
         for x in range(len(self.moves)):
             if move == self.moves[x].name:
                 index = x
                 break
         move = self.moves[index]
-        if move.type == 'damage':
-            attack = move.amount
-            if is_effective(self, enemy):
-                attack += 2
-            enemy.hp = enemy.hp-attack
-            if enemy.hp<=0:
-                print ('{} has knocked out {}'.format(self.name, enemy.name))
-                return True
-            else:
-                print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
-                return False 
-        if move.type == 'heal':
-            heal = move.amount
-            heal = round((self.maxhp-self.hp)*heal)
-            print ('{} has healed for {}!'.format(self.name, heal))
-            self.hp += heal
+        if is_instance(move, specialmove):
+            while true:
+                if move.pp>0:
+                    if move.type == 'heal':
+                    heal = move.amount
+                    heal = round((self.maxhp-self.hp)*heal)
+                    print ('{} has healed for {}!'.format(self.name, heal))
+                    self.hp += heal
+                    pp -= 1
+                    break
+                else:
+                    print ("You have no pp left for {}! Enter another move!".format(move))
+                    move = choose_move()
+        else:        
+            if move.type == 'damage':
+                attack = move.amount
+                if is_effective(self, enemy):
+                    attack += 2
+                enemy.hp = enemy.hp-attack
+                if enemy.hp<=0:
+                    print ('{} has knocked out {}'.format(self.name, enemy.name))
+                    return True
+                else:
+                    print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
+                    return False 
 
     def level_up(self):
         print ('{} leveled up!'.format(self.name))
