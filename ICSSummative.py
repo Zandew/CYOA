@@ -137,11 +137,13 @@ If you beat all the guards, you can face the boss!', 'When you beat a pokemon, \
 you level up gaining 3 health points. Other pokemon attack within a range, but \
 your pokemon is special where it can have different attacks that do different \
 damage and effects, but most of these attacks are only available through \
-sidequests.', 'Each pokemon is of a different type. There are grass,fire and water kinds.\
+sidequests. Some attacks use Power Points, which are a limited resource that \
+can only be restored at a Pokemon Center which heals your pokemon. Power Points \
+allow you to use more powerful moves.', 'Each pokemon is of a different type. There are grass,fire and water kinds.\
 Grass is super effective on water, water is super effective on fire and fire is \
 super effective on grass! There are also pokemon with no type that are only super \
 effective against other pokemon with no type. Type super effectiveness \
-increases damage!']
+increases damage!']]
 
 gameinfo2 = ['You have waken up in a room with no apparent exit other than two doors','You have no idea what \
 has happened, only that you were on your way to the prestigeous Pokemon Academy for \
@@ -266,7 +268,7 @@ def startingroom(): #This is the first room players end up in
         
 def pokecenter():
     command = input('It looks like there is a Pokemon Center nearby, do you want to heal your pokemon?').lower()
-    if 'yes' in command:
+    if 'yes' in command or 'heal' in command:
     	print ('Hello, and welcome to the Pokémon Center. We will heal your pokemon to full health.')
     	starterpokemon.heal()
     	print ('Please come again!')
