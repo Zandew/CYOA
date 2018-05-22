@@ -129,6 +129,8 @@ class starter_pokemon(pokemon):
                     print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
                     return False 
 
+   
+
     def level_up(self):
         print ('{} leveled up!'.format(self.name))
         print ('You have gained 3 hp points! ')
