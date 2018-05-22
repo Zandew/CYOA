@@ -92,6 +92,7 @@ class starter_pokemon(pokemon):
             if move not in self.movenames:
                 print ('Enter a valid move!')
                 continue
+            break
         for x in range(len(self.moves)):
             if move == self.moves[x].name:
                 index = x
