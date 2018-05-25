@@ -85,7 +85,10 @@ class starter_pokemon(pokemon):
         print ('What move do you want {} to use?!'.format(self.name))
         print ('--------------------')
         for move in self.moves:
-            print (move)
+            if isinstance(move, specialmove()):
+                print (move + "     pp: " + str(move.pp))
+            else:
+                print (move)
         print ('--------------------')
         while True:
             move = input().lower()
