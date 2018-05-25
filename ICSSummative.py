@@ -185,7 +185,8 @@ class Sidequest():
         print ("You have started a sidequest!")
         time.sleep(1)
         print ("In order to complete this quest you have to defeat {} pokemon".format(self.objective))
-        starterpokemon.sidequest = 0
+        starterpokemon.objectives = 0
+        starterpokemon.currentsidequest = self
         
     def complete(self):
         print ("Congratulations you have completed this sidequest!")
@@ -228,10 +229,10 @@ def battle(pokemon1, pokemon2):
         x = pokemon1.attack(pokemon2)
         if x==True:
             pokemon1.level_up()
-            if starerpokemon.sidequest!=None:
+            if starterpokemon.objectives!=None:
                 starterpokemon.objectives += 1
                 if starterpokemon.objectives == starterpokemon.currentsidequest.objective:
-                    staterpokemon.currentsidequest.complete()
+                    starterpokemon.currentsidequest.complete()
             return True
             break
         x = pokemon2.attack(pokemon1)
@@ -281,9 +282,7 @@ your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 def sidequestroom():
     swordstance = specialmove("swordstance", "passive", 2, 10)
     quest1 = Sidequest(3, swordstance)
-    quest1.start() 
-    starterpokemon.currentsidequest = quest1
-    quest1.complete()
+    quest1.start()
     
 def room1():#Where you can level up your pokemon, then you go into the guard room.
     print('Here you can level up your pokemon if you win a battle.')
@@ -365,6 +364,7 @@ def main():
     starterpokemon = getstarterpokemon()
     for dialogue in gameinfo2:
         print (dialogue)
+    sidequestroom()
     startingroom()
     
 main()
