@@ -136,6 +136,7 @@ class starter_pokemon(pokemon):
                         break
                     if move.type == 'charge':
                         self.skipmove = True
+                        self.chargemove = move
                         print ("{} is charging up".format(self.name))
                         break
                 else:
