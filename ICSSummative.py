@@ -47,6 +47,7 @@ class specialmove():
         self.name = name
         self.type = type
         self.amount = amount
+        self.maxpp = pp
         self.pp = pp
     def __str__(self):
         return self.name
@@ -150,6 +151,12 @@ class starter_pokemon(pokemon):
     def addmove(self, move):
         self.moves.append(move)
         self.movenames.append(move.name)
+        
+    def heal(self):
+        self.hp = self.maxhp
+        for move in self.moves:
+            if isinstace(move, specialmove):
+                move.pp = move.maxpp
         
 gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat \
 the boss and escape the locked room.', 'You have to escape by battling pokemon. \
