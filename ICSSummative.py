@@ -272,7 +272,7 @@ def startingroom(): #This is the first room players end up in
         
 def pokecenter():
     command = input('It looks like there is a Pokemon Center nearby, do you want to heal your pokemon?').lower()
-    if 'yes' in command:
+    if 'yes' in command or 'heal' in command:
     	print ('Hello, and welcome to the Pokémon Center. We will heal your pokemon to full health.')
     	starterpokemon.heal()
     	print ('Please come again!')
