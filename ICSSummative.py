@@ -228,11 +228,11 @@ def battle(pokemon1, pokemon2):
         x = pokemon1.attack(pokemon2)
         if x==True:
             pokemon1.level_up()
-            return True
             if starerpokemon.sidequest!=None:
                 starterpokemon.objectives += 1
                 if starterpokemon.objectives == starterpokemon.currentsidequest.objective:
                     staterpokemon.currentsidequest.complete()
+            return True
             break
         x = pokemon2.attack(pokemon1)
         if x==True:
