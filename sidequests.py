@@ -1,63 +1,22 @@
-class sidequest(): #After creating instance of class, assign it to a pokemon 
-  
-  def __init__(self, name, reward):
-    self.name = name
-    self.reward = reward #Reward should be a function so when we complete the sidequest, we call the function
-    
-  def complete_sidequest():
-    reward()
-     
-class NPC():
-  
-  def __init__(self, name):
-    self.name = name
-    self.questlist = []
-    self.sidequest = self.questlist[random.randint(0, len(self.questlist)-1)]
-      
-  def talk():
-    print (dialogue)
-    command = input('Accept Quest?(Enter Yes or No)').lower()
-    if command == 'yes':
-      starterpokemon.start_sidequest(sidequest)
-                                                   
- class pokemon():
-
-    def __init__(self, name, hp, attack, type):
-        self.maxhp = hp
-        self.name = name
-        self.hp = hp
-        self.maxattack = attack
-        self.type = type
-        self.sidequest = None #New attribute sidequest
-        self.passive = None
-
-    @property
-    def minattack(self):
-        return round(self.maxattack*0.7)
+class Sidequest():
+    def __init__(objective, reward):
+        self.objective = objective
+        self.reward = reward
         
-    def levelup(self):
-        print ('{} leveled up!'.format(self.name))
-        print ('You have gained 5 stat points! ')
-        health = int(input("How many stats do you want to allocate into HP?"))
-        while health<0 or health>5:
-            print('This is not a valid increase in health!')
-            health = int(input("How many stats do you want to allocate into HP?"))
-        print(5-health,'points were allocated into attack. ')
-        self.hp += health
-        self.maxattack += 5-health
+    def start(self):
+        print ("You have started a sidequest!")
+        time.sleep(1)
+        print ("In order to complete this quest you have to defeat {} pokemon".format(self.objective))
         
-    def heal(self):
-        self.hp = self.maxhp    
-       
-    def start_sidequest(self, sidequest):
-        self.sidequest = sidequest
+    def complete():
+        print ("Congratulations you have completed this sidequest!")
+        print ("You have earned the move {}!".format(self.reward))
+        starterpokemon.addmove(reward)
         
-    def complete_sidequest(self):
-        self.sidequest.complete_sidequest()
-        
-    def passive(self):
-        passive()
-        
+quest1 = (3, swordstance)
+swordstance = specialmove("swordstance", "passive", 2, 10)
+quest2 = (3, skullbash)
+skullbash = specialmove("skull bash", "charge", 25, 10)
                                                    
       
       
