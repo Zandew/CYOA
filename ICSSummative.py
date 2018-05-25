@@ -85,7 +85,7 @@ class starter_pokemon(pokemon):
         print ('What move do you want {} to use?!'.format(self.name))
         print ('--------------------')
         for move in self.moves:
-            if isinstance(move, specialmove()):
+            if isinstance(move, specialmove):
                 print (move + "     pp: " + str(move.pp))
             else:
                 print (move)
@@ -313,7 +313,7 @@ def main():
     global starterpokemon
     for dialogue in gameinfo1:
         print (dialogue)
-        time.sleep(5)
+        time.sleep(3)
     starterpokemon = getstarterpokemon()
     for dialogue in gameinfo2:
         print (dialogue)
