@@ -86,7 +86,7 @@ class starter_pokemon(pokemon):
         print ('--------------------')
         for move in self.moves:
             if isinstance(move, specialmove):
-                print (move + "     pp: " + str(move.pp))
+                print (move.name + "     pp: " + str(move.pp))
             else:
                 print (move)
         print ('--------------------')
