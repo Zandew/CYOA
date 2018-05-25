@@ -84,6 +84,8 @@ class starter_pokemon(pokemon):
         self.movenames = [tackle.name, heal.name]
         self.objectives = None
         self.currentsidequest = None
+        self.skipmove = False
+        self.chargemove = None
 
     def choose_move(self):
         print ('What move do you want {} to use?!'.format(self.name))
@@ -109,6 +111,11 @@ class starter_pokemon(pokemon):
                
     def attack(self, enemy):
         print ('It is your turn!')
+        if self.skipmove ==True:
+            print ("{} used skull bash and dealt {} damage to {}!".format(self.name, chargemove.amount, enemy.name))
+            enemy.hp -= chargemove.amount
+            self.skipmove = False
+            return None
         move = self.choose_move()
         if isinstance(move, specialmove):
             while True:
@@ -126,6 +133,10 @@ class starter_pokemon(pokemon):
                         print ('{} has increased his attack!'.format(self.name))
                         self.extraattack += amount
                         move.pp -= 1
+                        break
+                    if move.type == 'charge':
+                        self.skipmove = True
+                        print ("{} is charging up".format(self.name))
                         break
                 else:
                     print ("You have no pp left for {}! Enter another move!".format(move))
@@ -281,7 +292,8 @@ your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
 def sidequestroom():
     swordstance = specialmove("swordstance", "passive", 2, 10)
-    quest1 = Sidequest(3, swordstance)
+    skullbash = specialmove("skull bash", "charge", 25, 10)
+    quest1 = Sidequest(1, skullbash)
     quest1.start()
     
 def room1():#Where you can level up your pokemon, then you go into the guard room.
