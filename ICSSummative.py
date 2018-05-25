@@ -263,7 +263,7 @@ we shall explain.','James: That pokemon of yours has a very special ability that
 That ability is being able to grow exponentially fast through the use of pokemon battles.','Meowth: You have the only other \
 pokemon than me that has this ability. We absolutely cannot let you have it.','Jessie:Your friends, they have no idea what has \
 happened to you. Your family as well. They would never believe you anyways, so do not try to defy us. You have barely known that \
-pokemon anyways, so if you do not mind, we will take that pokemon by force.']
+pokemon, so if you do not mind, we will take that pokemon by force.']
 
 endingdialogue=['Jessie: So you have beaten us... That must be a true testament of your skill.','James: It appears like we will \
 have to let you go for now, but know that there are much more dangerous groups out there targeting your pokemon and its ability.'\
