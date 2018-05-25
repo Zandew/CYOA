@@ -78,6 +78,7 @@ class starter_pokemon(pokemon):
   
     def __init__(self, name, maxhp, type):
         super().__init__(name, maxhp, type)
+        self.extraattack = 0
         self.moves = [tackle, heal]
         self.movenames = [tackle.name, heal.name]
         self.objectives = None
@@ -119,12 +120,18 @@ class starter_pokemon(pokemon):
                         if self.hp>self.maxhp:
                             self.hp = self.maxhp
                         break
+                    if move.type == 'passive':
+                        amount = move.amount
+                        print ('{} has increased his attack!'.format(self.name))
+                        self.extraattack += amount
+                        move.pp -= 1
+                        break
                 else:
                     print ("You have no pp left for {}! Enter another move!".format(move))
                     move = self.choose_move()
         else:        
             if move.type == 'damage':
-                attack = move.amount
+                attack = move.amount+self.extraattack
                 if is_effective(self, enemy):
                     attack += 2
                 enemy.hp = enemy.hp-attack
@@ -163,7 +170,7 @@ pokemon with you to help you escape. While thinking about this situation, you ca
 to me? Where do these doors lead? How could I have ever ended up in this situation...']
         
 class Sidequest():
-    def __init__(objective, reward):
+    def __init__(self, objective, reward):
         self.objective = objective
         self.reward = reward
         
@@ -173,10 +180,10 @@ class Sidequest():
         print ("In order to complete this quest you have to defeat {} pokemon".format(self.objective))
         starterpokemon.sidequest = 0
         
-    def complete():
+    def complete(self):
         print ("Congratulations you have completed this sidequest!")
         print ("You have earned the move {}!".format(self.reward))
-        starterpokemon.addmove(reward)    
+        starterpokemon.addmove(self.reward)    
     
 def getstarterpokemon():
     starterpokemonname=input("Enter your pokemon name: ") #Players can choose their pokemon's name
@@ -225,6 +232,7 @@ def battle(pokemon1, pokemon2):
             print ('{} fainted!'.format(starterpokemon.name))
             print ( "YOU LOSE")
             sys.exit()
+    self.extraattack = 0
 
 wild1 = wildpokemon('Bidoof', random.randint(30, 40), 8,'None')
 wild2 = wildpokemon('Poliwag', random.randint(40, 45), 7, 'water')
@@ -264,14 +272,15 @@ train but know that we are being targeted by some very dangerous organizations a
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
 def sidequestroom():
-    swordstance = specialmove("swordstance", passive, 2)
-    quest1 = (3, swordstance)
+    swordstance = specialmove("swordstance", "passive", 2, 10)
+    quest1 = Sidequest(3, swordstance)
     quest1.start() 
     starterpokemon.currentsidequest = quest1
     quest1.complete()
     
 def room1():#Where you can level up your pokemon, then you go into the guard room.
     print('Here you can level up your pokemon if you win a battle.')
+    sidequestroom()
     wildencounter()
     print ('You come across a huge hole and the only ways to get across are to walk over an old bridge or to walk around the hole')
     print ('Do you take the bridge or walk around the hole?')
@@ -283,7 +292,6 @@ def room1():#Where you can level up your pokemon, then you go into the guard roo
     else:
          print ('You crossed the hole safely!')
     pokecenter()
-    sidequestroom()
     guardroom()
 
         
@@ -348,11 +356,9 @@ def main():
     global starterpokemon
     for dialogue in gameinfo1:
         print (dialogue)
-        time.sleep(3)
     starterpokemon = getstarterpokemon()
     for dialogue in gameinfo2:
         print (dialogue)
-        time.sleep(3)
     startingroom()
     
 main()
