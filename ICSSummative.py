@@ -80,6 +80,8 @@ class starter_pokemon(pokemon):
         super().__init__(name, maxhp, type)
         self.moves = [tackle, heal]
         self.movenames = [tackle.name, heal.name]
+        self.objectives = None
+        self.currentsidequest = None
 
     def choose_move(self):
         print ('What move do you want {} to use?!'.format(self.name))
@@ -137,6 +139,11 @@ class starter_pokemon(pokemon):
         print ('{} leveled up!'.format(self.name))
         print ('You have gained 3 hp points! ')
         self.maxhp += 3
+        
+    def addmove(self, move):
+        self.moves.append(move)
+        self.movenames.append(move.name)
+        
 gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat \
 the boss and escape the locked room.', 'You have to escape by battling pokemon. \
 If you beat all the guards, you can face the boss!', 'When you beat a pokemon, \
@@ -155,6 +162,22 @@ your first day of middle school with your very first pokemon.', 'Now, you appear
 pokemon with you to help you escape. While thinking about this situation, you can not help but wonder; why did this happen \
 to me? Where do these doors lead? How could I have ever ended up in this situation...']
         
+class Sidequest():
+    def __init__(objective, reward):
+        self.objective = objective
+        self.reward = reward
+        
+    def start(self):
+        print ("You have started a sidequest!")
+        time.sleep(1)
+        print ("In order to complete this quest you have to defeat {} pokemon".format(self.objective))
+        starterpokemon.sidequest = 0
+        
+    def complete():
+        print ("Congratulations you have completed this sidequest!")
+        print ("You have earned the move {}!".format(self.reward))
+        starterpokemon.addmove(reward)    
+    
 def getstarterpokemon():
     starterpokemonname=input("Enter your pokemon name: ") #Players can choose their pokemon's name
     ptype=0 #arbitrary value to enter the while loop
@@ -192,6 +215,10 @@ def battle(pokemon1, pokemon2):
         if x==True:
             pokemon1.level_up()
             return True
+            if starerpokemon.sidequest!=None:
+                starterpokemon.objectives += 1
+                if starterpokemon.objectives == starterpokemon.currentsidequest.objective:
+                    staterpokemon.currentsidequest.complete()
             break
         x = pokemon2.attack(pokemon1)
         if x==True:
@@ -236,6 +263,13 @@ have to let you go for now, but know that there are much more dangerous groups o
 train but know that we are being targeted by some very dangerous organizations as well. Our deal is that we will help you train \
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
+def sidequestroom():
+    swordstance = specialmove("swordstance", passive, 2)
+    quest1 = (3, swordstance)
+    quest1.start() 
+    starterpokemon.currentsidequest = quest1
+    quest1.complete()
+    
 def room1():#Where you can level up your pokemon, then you go into the guard room.
     print('Here you can level up your pokemon if you win a battle.')
     wildencounter()
@@ -249,6 +283,7 @@ def room1():#Where you can level up your pokemon, then you go into the guard roo
     else:
          print ('You crossed the hole safely!')
     pokecenter()
+    sidequestroom()
     guardroom()
 
         
