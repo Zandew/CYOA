@@ -51,8 +51,11 @@ class specialmove():
         self.pp = pp
     def __str__(self):
         return self.name
+    
 tackle = basicmove('tackle', 'damage', 7)
 heal = specialmove('heal', 'heal', 15, 10)
+swordstance = specialmove("swordstance", "passive", 2, 10)
+skullbash = specialmove("skull bash", "charge", 25, 10)
 
 class wildpokemon(pokemon):
 
@@ -112,8 +115,11 @@ class starter_pokemon(pokemon):
     def attack(self, enemy):
         print ('It is your turn!')
         if self.skipmove ==True:
-            print ("{} used skull bash and dealt {} damage to {}!".format(self.name, chargemove.amount, enemy.name))
-            enemy.hp -= chargemove.amount
+            print ("{} used skull bash and dealt {} damage to {}!".format(self.name, self.chargemove.amount, enemy.name))
+            enemy.hp -= self.chargemove.amount
+            if enemy.hp<=0:
+                print ("{} has knocked out {}!".format(self.name, enemy.name))
+                return True
             self.skipmove = False
             return None
         move = self.choose_move()
@@ -204,6 +210,9 @@ class Sidequest():
         print ("Congratulations you have completed this sidequest!")
         print ("You have earned the move {}!".format(self.reward))
         starterpokemon.addmove(self.reward)    
+        
+quest1 = Sidequest(3, swordstance)
+quest2 = Sidequest(3, skullbash)
     
 def getstarterpokemon():
     starterpokemonname=input("Enter your pokemon name: ") #Players can choose their pokemon's name
@@ -292,10 +301,8 @@ train but know that we are being targeted by some very dangerous organizations a
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
 def sidequestroom():
-    swordstance = specialmove("swordstance", "passive", 2, 10)
-    skullbash = specialmove("skull bash", "charge", 25, 10)
-    quest1 = Sidequest(1, skullbash)
-    quest1.start()
+    quest = questlist[random.randint(0, 1)]
+    quest.start()
     
 def room1():#Where you can level up your pokemon, then you go into the guard room.
     print('Here you can level up your pokemon if you win a battle.')
