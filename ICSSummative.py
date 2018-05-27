@@ -43,19 +43,22 @@ class basicmove():
     
 class specialmove():
    
-    def __init__(self, name, type, amount, pp):
+    def __init__(self, name, type, amount, pp, description=None):
         self.name = name
         self.type = type
         self.amount = amount
         self.maxpp = pp
         self.pp = pp
+        self.description = description
+        
     def __str__(self):
         return self.name
     
 tackle = basicmove('tackle', 'damage', 7)
-heal = specialmove('heal', 'heal', 15, 10)
-swordstance = specialmove("swordstance", "passive", 2, 10)
-skullbash = specialmove("skull bash", "charge", 25, 10)
+heal = specialmove('heal', 'heal', 15, 5)
+swordstance = specialmove("swordstance", "passive", 2, 5, "Increases your attack by 2 for the rest of the battle")
+skullbash = specialmove("skull bash", "charge", 25, 5, "Charge up for 1 turn and deal 25 damage next turn")
+toughskin = specialmove("tough skin", "passive", 2, 5, "Take 2 less damage from the opponent's attack for the rest of the battle")
 
 class wildpokemon(pokemon):
 
@@ -69,7 +72,7 @@ class wildpokemon(pokemon):
         return round(self.maxattack*0.7)
 
     def attack(self, enemy):
-        attack = random.randint(self.minattack, self.maxattack)
+        attack = random.randint(self.minattack, self.maxattack)-enemy.defense
         enemy.hp = enemy.hp-attack
         if enemy.hp<=0:
             print ('{} has knocked out {}'.format(self.name, enemy.name))
@@ -89,13 +92,14 @@ class starter_pokemon(pokemon):
         self.currentsidequest = None
         self.skipmove = False
         self.chargemove = None
+        self.defense = 0
 
     def choose_move(self):
         print ('What move do you want {} to use?!'.format(self.name))
         print ('--------------------')
         for move in self.moves:
             if isinstance(move, specialmove):
-                print (move.name + "     pp: " + str(move.pp))
+                print (format(move.name, "15s") + "pp: " + str(move.pp))
             else:
                 print (move)
         print ('--------------------')
@@ -136,14 +140,20 @@ class starter_pokemon(pokemon):
                         break
                     if move.type == 'passive':
                         amount = move.amount
-                        print ('{} has increased his attack!'.format(self.name))
-                        self.extraattack += amount
+                        if move.name == "swordstance":
+                            print ("{} has increased his attack!".format(self.name))
+                            self.extraattack += amount
+                        elif move.name == "tough skin":
+                            print ("{} has increased it's defense!".format(self.name))
+                            self.defense += 2
+                            break
                         move.pp -= 1
                         break
                     if move.type == 'charge':
                         self.skipmove = True
                         self.chargemove = move
                         print ("{} is charging up".format(self.name))
+                        move.pp -= 1
                         break
                 else:
                     print ("You have no pp left for {}! Enter another move!".format(move))
@@ -173,8 +183,12 @@ class starter_pokemon(pokemon):
     def heal(self):
         self.hp = self.maxhp
         for move in self.moves:
-            if isinstace(move, specialmove):
+            if isinstance(move, specialmove):
                 move.pp = move.maxpp
+
+    def reset_buffs(self):
+        self.extraattack = 0
+        self.defense = 0
         
 gameinfo1 = ['Welcome to the game!', 'The objective of this game is to defeat \
 the boss and escape the locked room.', 'You have to escape by battling pokemon. \
@@ -203,6 +217,10 @@ class Sidequest():
         print ("You have started a sidequest!")
         time.sleep(1)
         print ("In order to complete this quest you have to defeat {} pokemon".format(self.objective))
+        print ("*****************")
+        print ("REWARD: {}".format(self.reward))
+        print (self.reward.description)
+        print ("*****************")
         starterpokemon.objectives = 0
         starterpokemon.currentsidequest = self
         
@@ -210,9 +228,6 @@ class Sidequest():
         print ("Congratulations you have completed this sidequest!")
         print ("You have earned the move {}!".format(self.reward))
         starterpokemon.addmove(self.reward)    
-        
-quest1 = Sidequest(3, swordstance)
-quest2 = Sidequest(3, skullbash)
     
 def getstarterpokemon():
     starterpokemonname=input("Enter your pokemon name: ") #Players can choose their pokemon's name
@@ -238,8 +253,8 @@ def is_effective(pokemon1, pokemon2):
        
 def battle(pokemon1, pokemon2):
     print('   / __  )  /   |   /__  __/__  __/ /  /     /  ___/')
-    print('  / __  |  / /| |    / /    / /    /  /     /  __/   ')  
-    print(' / /_/ )  / ___ |   / /    / /    /  /___  /  /__   ')
+    print('  / __  |  / /| |    / /    / /    /  /     /  __/  ')  
+    print(' / /_/ )  / ___ |   / /    / /    /  /__   /  /__   ')
     print('/_____/  /_/  |_/  /_/    /_/    /_____/  /_____/   ')
     print('{} versus {}!'.format(pokemon1.name.upper(), pokemon2.name.upper()))
     if is_effective(pokemon1, pokemon2):
@@ -254,6 +269,7 @@ def battle(pokemon1, pokemon2):
                 starterpokemon.objectives += 1
                 if starterpokemon.objectives == starterpokemon.currentsidequest.objective:
                     starterpokemon.currentsidequest.complete()
+            starterpokemon.reset_buffs()
             return True
             break
         x = pokemon2.attack(pokemon1)
@@ -261,7 +277,6 @@ def battle(pokemon1, pokemon2):
             print ('{} fainted!'.format(starterpokemon.name))
             print ( "YOU LOSE")
             sys.exit()
-    self.extraattack = 0
 
 wild1 = wildpokemon('Bidoof', random.randint(30, 40), 8,'None')
 wild2 = wildpokemon('Poliwag', random.randint(40, 45), 7, 'water')
@@ -300,22 +315,34 @@ have to let you go for now, but know that there are much more dangerous groups o
 train but know that we are being targeted by some very dangerous organizations as well. Our deal is that we will help you train \
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
+quest1 = Sidequest(3, swordstance)
+quest2 = Sidequest(3, skullbash)
+sidequestlist = [quest1, quest2]
+
 def sidequestroom():
-    quest = questlist[random.randint(0, 1)]
+    quest = sidequestlist[random.randint(0, 1)]
     quest.start()
     
 def room1():#Where you can level up your pokemon, then you go into the guard room.
     print('Here you can level up your pokemon if you win a battle.')
     wildencounter()
     print ('You come across a huge hole and the only ways to get across are to walk over an old bridge or to walk around the hole')
-    print ('Do you take the bridge or walk around the hole?')
-    command = input().lower()
-    if 'bridge' in command:
-         print ('While you are taking the bridge, the bridge collapses, you fall down the hole and find a wild pokemon!!')
-         wildencounter()
-         print ('Luckily there is a ladder going up the hole, you take the ladder and reach the other side')
-    else:
-         print ('You crossed the hole safely!')
+    print ('Do you')
+    print ('1: Take the bridge')
+    print ('2: Go around the hole')
+    command = input()
+    while True:
+        if command=='1':
+            print ('While you are taking the bridge, the bridge collapses, you fall down the hole and find a wild pokemon!!')
+            wildencounter()
+            print ('Luckily there is a ladder going up the hole, you take the ladder and reach the other side')
+            break
+        elif command=='2':
+            print ('You crossed the hole safely')
+            break
+        else:
+            print ('Enter a valid choice')
+            command = input()
     pokecenter()
     guardroom()
 
