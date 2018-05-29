@@ -2,7 +2,7 @@
 Author: Rayton Lin & Andrew Xue
 Teachers: Mr.Saleem
 Date created:May 9th,2018
-Date modified: May 9th,2018
+Date modified: May 29th,2018
 Python Version: 3.6
 '''
 import time
@@ -20,18 +20,9 @@ class pokemon():
     def heal(self):
         self.hp = self.maxhp
         
-effectivedict = {'water': ['fire'],
-                 'fire': ['grass'],
-                 'grass': ['water'],
-                 'None': ['None'],
-                 'psychic': ['fire', 'water', 'grass', 'None']}
-    
-def is_effective(pokemon1, pokemon2):
-    if pokemon2.type in effectivedict[pokemon1.type]:
-        return True
-    return False    
+      
 
-class basicmove():
+class basicmove():#Determines properties of basic moves
     
     def __init__(self, name, type, amount):
         self.name = name
@@ -41,7 +32,7 @@ class basicmove():
     def __str__(self):
         return self.name
     
-class specialmove():
+class specialmove():#Determines properties of special moves
    
     def __init__(self, name, type, amount, pp, description=None):
         self.name = name
@@ -57,10 +48,10 @@ class specialmove():
 tackle = basicmove('tackle', 'damage', 7)
 heal = specialmove('heal', 'heal', 15, 5)
 swordstance = specialmove("swordstance", "passive", 2, 5, "Increases your attack by 2 for the rest of the battle")
-skullbash = specialmove("skull bash", "charge", 20, 5, "Charge up for 1 turn and deal 25 damage next turn")
+skullbash = specialmove("skull bash", "charge", 25, 5, "Charge up for 1 turn and deal 25 damage next turn")
 toughskin = specialmove("tough skin", "passive", 2, 5, "Take 2 less damage from the opponent's attack for the rest of the battle")
 
-class wildpokemon(pokemon):
+class wildpokemon(pokemon):#Determines stats and properties of the wild pokemon
 
     def __init__(self, name, maxhp, maxattack, type):
         super().__init__(name, maxhp, type)
@@ -81,7 +72,7 @@ class wildpokemon(pokemon):
             print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
             return False
         
-class starter_pokemon(pokemon):
+class starter_pokemon(pokemon):#Configures stats and properties of the starter pokemon
   
     def __init__(self, name, maxhp, type):
         super().__init__(name, maxhp, type)
@@ -141,7 +132,7 @@ class starter_pokemon(pokemon):
                 return True
             self.skipmove = False
             return None
-        move = self.choose_move(enemy)
+        move = self.choose_move()
         if isinstance(move, specialmove):
             while True:
                 if move.pp>0:
@@ -223,7 +214,7 @@ your first day of middle school with your very first pokemon.', 'Now, you appear
 pokemon with you to help you escape. While thinking about this situation, you can not help but wonder; why did this happen \
 to me? Where do these doors lead? How could I have ever ended up in this situation...']
         
-class Sidequest():
+class Sidequest():#Determines when the sidequest starts and ends, and gives the reward
     def __init__(self, objective, reward):
         self.objective = objective
         self.reward = reward
@@ -261,12 +252,12 @@ effectivedict = {'water': ['fire'],
                  'None': ['None'],
                  'psychic': ['fire', 'water', 'grass', 'None']}
     
-def is_effective(pokemon1, pokemon2):
+def is_effective(pokemon1, pokemon2):#Determines if the pokemon's type is super effective
     if pokemon2.type in effectivedict[pokemon1.type]:
         return True
     return False
        
-def battle(pokemon1, pokemon2):
+def battle(pokemon1, pokemon2):#Starts the battle sequence
     print('   / __  )  /   |   /__  __/__  __/ /  /     /  ___/')
     print('  / __  |  / /| |    / /    / /    /  /     /  __/  ')  
     print(' / /_/ )  / ___ |   / /    / /    /  /__   /  /__   ')
@@ -304,7 +295,7 @@ guard1 = wildpokemon('Vaporeon', 45, 10, 'water')
 guard2 = wildpokemon('Leafeon', 40, 11, 'grass')
 guard3 = wildpokemon('Flareon', 45, 11, 'fire')
 boss = wildpokemon('Meowth', 55, 14, 'psychic')
-
+#Above are the pokemon you can encounter
 wildlist = [wild1, wild2, wild3, wild4, wild5, wild6, wild7]
 guardlist = [guard1, guard2, guard3]
 
@@ -330,12 +321,11 @@ have to let you go for now, but know that there are much more dangerous groups o
 train but know that we are being targeted by some very dangerous organizations as well. Our deal is that we will help you train \
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
-quest1 = Sidequest(2, swordstance)
-quest2 = Sidequest(2, skullbash)
-quest3 = Sidequest(2, toughskin)
+quest1 = Sidequest(3, swordstance)
+quest2 = Sidequest(3, skullbash)
 sidequestlist = [quest1, quest2]
 
-def sidequestroom():
+def sidequestroom():#Starts a sidequests where you can get a new move
     quest = sidequestlist[random.randint(0, 1)]
     quest.start()
     
@@ -381,53 +371,54 @@ def startingroom(): #This is the first room players end up in
         print('Please enter a valid direction!')
         startingroom()
         
-def pokecenter():
+def pokecenter():#You can heal your pokemon's health and pp here
     command = input('It looks like there is a Pokemon Center nearby, do you want to heal your pokemon?').lower()
     if 'yes' in command or 'heal' in command:
     	print ('Hello, and welcome to the Pokémon Center. We will heal your pokemon to full health.')
     	starterpokemon.heal()
     	print ('Please come again!')
         
-def guardroom():
+def guardroom():#Enters the guard room, starting the first non-wild pokemon battle in the game
     print('This is the guard room! You have to face 3 pokemon back to back!')
     guardbattle()
     pokecenter()
     bossbattle()
 
-def wildencounter():
+def wildencounter():#Starts a wild pokemon battle
     index = random.randint(0, 6)
     wild = wildlist[index]
     print ('A wild {} appeared!'.format(wild.name))
     time.sleep(1)
-    battle(starterpokemon, wild)
+    battle(starterpokemon, wild)#Starts the battle
     wild.heal()
 
-def guardbattle():
+def guardbattle():#Prints the dialogue for the guards, then starts the battle
     for guard, dialogue in zip(guardlist, dialoguelist):
         print (dialogue)
-        battle(starterpokemon, guard)
+        battle(starterpokemon, guard)#Starts the battle
 
-def endingscene():
+def endingscene():#Prints the dialogue for the ending scene, then ends the game
     for dialogue in endingdialogue:
         print(dialogue)
         time.sleep(2.5)
     sys.exit()        
         
-def bossbattle():
-    for dialogue in bossdialogue:
+def bossbattle():#Starts the final battle in the game and the hardest, the boss battle
+    for dialogue in bossdialogue:#Prints the dialogue for the bosses
         print (dialogue)
         time.sleep(2.5)
-    battle(starterpokemon, boss)
-    endingscene()
+    battle(starterpokemon, boss)#Starts the battle
+    endingscene()#When you win, it starts the ending scene
     
 def main():
-    global starterpokemon
-    for dialogue in gameinfo1:
+    global starterpokemon #Makes starterpokemon a global variable used throughout the program
+    for dialogue in gameinfo1: #Displays the first lines of text
         print (dialogue)
-    starterpokemon = getstarterpokemon()
-    for dialogue in gameinfo2:
+    starterpokemon = getstarterpokemon()#Stores the properties of the starter pokemon
+    for dialogue in gameinfo2:#Displays the next lines of text
         print (dialogue)
-    sidequestroom()
-    startingroom()
+    sidequestroom()#Starts a sidequest
+    startingroom()#Starts the game in the starting room
     
-main()
+main()#Starts the prologue
+
