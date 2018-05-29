@@ -321,12 +321,13 @@ have to let you go for now, but know that there are much more dangerous groups o
 train but know that we are being targeted by some very dangerous organizations as well. Our deal is that we will help you train \
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
-quest1 = Sidequest(3, swordstance)
-quest2 = Sidequest(3, skullbash)
-sidequestlist = [quest1, quest2]
+quest1 = Sidequest(2, swordstance)
+quest2 = Sidequest(2, skullbash)
+quest3 = Sidequest(2, toughskin)
+sidequestlist = [quest1, quest2, quest3]
 
 def sidequestroom():#Starts a sidequests where you can get a new move
-    quest = sidequestlist[random.randint(0, 1)]
+    quest = sidequestlist[random.randint(0, 2)]
     quest.start()
     
 def room1():#Where you can level up your pokemon, then you go into the guard room.
