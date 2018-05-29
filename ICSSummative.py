@@ -99,13 +99,13 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
             if move=='stats':
                 print (format(self.name.upper(), '15s') + str(self.hp) + '/' + str(self.maxhp))
                 selfpercent = round((self.hp/self.maxhp)*20)
-                selfhp1 = ['#' for x in range(selfpercent)]
+                selfhp1 = ['■' for x in range(selfpercent)]
                 selfhp2 = ['_' for x in range(20-selfpercent)]
                 hpbar = ''.join(selfhp1 + selfhp2)
                 print (hpbar)
                 print (format(enemy.name.upper(), '15s') + str(enemy.hp) + '/' + str(enemy.maxhp))
                 enemypercent = round((enemy.hp/enemy.maxhp)*20)
-                enemyhp1 = ['#' for x in range(enemypercent)]
+                enemyhp1 = ['■' for x in range(enemypercent)]
                 enemyhp2 = ['_' for x in range(20-enemypercent)]
                 hpbar = ''.join(enemyhp1 + enemyhp2)
                 print (hpbar)
