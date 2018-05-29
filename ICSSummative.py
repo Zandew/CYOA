@@ -163,7 +163,7 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
                         break
                 else:
                     print ("You have no pp left for {}! Enter another move!".format(move))
-                    move = self.choose_move()
+                    move = self.choose_move(enemy)
         else:        
             if move.type == 'damage':
                 attack = move.amount+self.extraattack
