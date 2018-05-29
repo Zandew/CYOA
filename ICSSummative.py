@@ -48,7 +48,7 @@ class specialmove():#Determines properties of special moves
 tackle = basicmove('tackle', 'damage', 7)
 heal = specialmove('heal', 'heal', 15, 5)
 swordstance = specialmove("swordstance", "passive", 2, 5, "Increases your attack by 2 for the rest of the battle")
-skullbash = specialmove("skull bash", "charge", 25, 5, "Charge up for 1 turn and deal 25 damage next turn")
+skullbash = specialmove("skull bash", "charge", 20, 5, "Charge up for 1 turn and deal 20 damage next turn")
 toughskin = specialmove("tough skin", "passive", 2, 5, "Take 2 less damage from the opponent's attack for the rest of the battle")
 
 class wildpokemon(pokemon):#Determines stats and properties of the wild pokemon
