@@ -284,6 +284,7 @@ def battle(pokemon1, pokemon2):#Starts the battle sequence
             print ( "YOU LOSE")
             sys.exit()
 
+snorlax = wildpokemon('Snorlax', 100, 2, 'None')
 wild1 = wildpokemon('Bidoof', random.randint(30, 40), 8,'None')
 wild2 = wildpokemon('Poliwag', random.randint(40, 45), 7, 'water')
 wild3 = wildpokemon('Magikarp', random.randint(30, 35), 5, 'water')
@@ -329,9 +330,38 @@ sidequestlist = [quest1, quest2, quest3]
 def sidequestroom():#Starts a sidequests where you can get a new move
     quest = sidequestlist[random.randint(0, 2)]
     quest.start()
+
+def ruins():
+    print ('You see a treasure chest, but there is a sleeping snorlax sitting on it!')
+    print ('Do you...')
+    print ('1. Attack snorlax with {}'.format(starterpokemon.name))
+    print ('2. Look around for another way to move snorlax')
+    command = input()
+    if command == '1':
+        print ('Snorlax wakes up and looks angry...')
+        battle(starterpokemon, snorlax)
+        print ('Congratulations, you defeated snorlax!')
+    elif command == '2':
+        print ('You find a mysterious flute and decide to play it')
+        print ('Snorlax starts sleepwalking and walks away from the chest!')
+    print ('You walk up to the treasure chest and open it, you find something!(TBD)')
+        
+def room3():
+    print ('This room looks like an abandoned city, there is what looks like an entrance to a ruins')
+    print ('Do you...')
+    print ('1. Enter the ruins')
+    print ('2. Keep walking on the main track')
+    command = input()
+    if command =='1':
+        ruins()
+    elif command =='2':
+        wildencounter()
+    pokecenter()
+    guardroom()
+    
     
 def room1():#Where you can level up your pokemon, then you go into the guard room.
-    print('Here you can level up your pokemon if you win a battle.')
+    print('This room has a lot of tall grass, it looks like it contains a lot of wild pokemon.')
     wildencounter()
     print ('You come across a huge hole and the only ways to get across are to walk over an old bridge or to walk around the hole')
     print ('Do you')
@@ -351,16 +381,23 @@ def room1():#Where you can level up your pokemon, then you go into the guard roo
             print ('Enter a valid choice')
             command = input()
     pokecenter()
-    guardroom()
+    room3()
 
         
         
 def room2():#Where you can level up your pokemon
-    print('Here you can level up your pokemon if you win a battle.')
+    print('This room looks like a swamp, it also looks like it contains many wild pokemon.')
     wildencounter()
-    print ('Looks like this room is a dead end!')
-    print('You arrived back at the starting room!')
-    startingroom()
+    print ('You come across a huge pond and you have to get across')
+    print ('Do you...')
+    print ('1. Swim across the pond')
+    print ('2. Walk around the pond')
+    command = input()
+    if command =='1':
+        print ('While swimming, you encounter a wild pokemon!')
+        wildencounter()
+    print ('You have safely crossed the swamp!')
+    room3()
        
 def startingroom(): #This is the first room players end up in
     command=input('Both rooms look like they contain wild pokemon. Turn left or right?: ')
