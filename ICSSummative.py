@@ -118,8 +118,9 @@ class starter_pokemon(pokemon):
                 enemyhp2 = ['_' for x in range(20-enemypercent)]
                 hpbar = ''.join(enemyhp1 + enemyhp2)
                 print (hpbar)
+                print ("Enter a move!")
                 continue
-            if move not in self.movenames:
+            elif move not in self.movenames:
                 print ('Enter a valid move!')
                 continue
             break
