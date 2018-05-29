@@ -132,7 +132,7 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
                 return True
             self.skipmove = False
             return None
-        move = self.choose_move()
+        move = self.choose_move(enemy)
         if isinstance(move, specialmove):
             while True:
                 if move.pp>0:
