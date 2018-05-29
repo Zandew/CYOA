@@ -330,8 +330,9 @@ have to let you go for now, but know that there are much more dangerous groups o
 train but know that we are being targeted by some very dangerous organizations as well. Our deal is that we will help you train \
 your pokemon in exchange for helping protect us. Is that a deal?','THE END']
 
-quest1 = Sidequest(3, swordstance)
-quest2 = Sidequest(3, skullbash)
+quest1 = Sidequest(2, swordstance)
+quest2 = Sidequest(2, skullbash)
+quest3 = Sidequest(2, toughskin)
 sidequestlist = [quest1, quest2]
 
 def sidequestroom():
