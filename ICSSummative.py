@@ -94,17 +94,31 @@ class starter_pokemon(pokemon):
         self.chargemove = None
         self.defense = 0
 
-    def choose_move(self):
+    def choose_move(self, enemy):
         print ('What move do you want {} to use?!'.format(self.name))
         print ('--------------------')
         for move in self.moves:
             if isinstance(move, specialmove):
-                print (format(move.name, "15s") + "pp: " + str(move.pp))
+                print (move.name + "     pp: " + str(move.pp))
             else:
                 print (move)
         print ('--------------------')
         while True:
             move = input().lower()
+            if move=='stats':
+                print (format(self.name.upper(), '15s') + str(self.hp) + '/' + str(self.maxhp))
+                selfpercent = round((self.hp/self.maxhp)*20)
+                selfhp1 = ['#' for x in range(selfpercent)]
+                selfhp2 = ['_' for x in range(20-selfpercent)]
+                hpbar = ''.join(selfhp1 + selfhp2)
+                print (hpbar)
+                print (format(enemy.name.upper(), '15s') + str(enemy.hp) + '/' + str(enemy.maxhp))
+                enemypercent = round((enemy.hp/enemy.maxhp)*20)
+                enemyhp1 = ['#' for x in range(enemypercent)]
+                enemyhp2 = ['_' for x in range(20-enemypercent)]
+                hpbar = ''.join(enemyhp1 + enemyhp2)
+                print (hpbar)
+                continue
             if move not in self.movenames:
                 print ('Enter a valid move!')
                 continue
@@ -126,7 +140,7 @@ class starter_pokemon(pokemon):
                 return True
             self.skipmove = False
             return None
-        move = self.choose_move()
+        move = self.choose_move(enemy)
         if isinstance(move, specialmove):
             while True:
                 if move.pp>0:
