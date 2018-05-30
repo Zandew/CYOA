@@ -238,7 +238,8 @@ class Sidequest():#Determines when the sidequest starts and ends, and gives the 
         print ("Congratulations you have completed this sidequest!")
         print ("You have earned the move {}!".format(self.reward))
         print ('..................................................')        
-        starterpokemon.addmove(self.reward)    
+        starterpokemon.addmove(self.reward)   
+        
     
 def getstarterpokemon():
     starterpokemonname=input("Enter your pokemon name: ") #Players can choose their pokemon's name
@@ -351,8 +352,15 @@ def ruins():
         print ('You find a mysterious flute and decide to play it')
         pause(1)
         print ('Snorlax starts sleepwalking and walks away from the chest!')
-    print ('You walk up to the treasure chest and open it, you find something!(TBD)')
-        
+    print ('You walk up to the treasure chest and open it, you find a sidequest!')
+    quest = sidequestlist[random.randint(0, 2)]
+    print('This sidequest rewards you with the move {}!'.format(quest.reward.name))
+    print(quest.reward.description)
+    answer=input('Do you want to start this sidequest? Y/N WARNING: Accepting this sidequest deletes any current sidequest.')
+    if answer.lower()=='y' or answer.lower=='yes':
+        quest.start()
+    else:
+        print('You have declined the sidequest!')
 def room3():
     print ('This room looks like an abandoned city, there is what looks like an entrance to a ruins')
     print ('Do you...')
