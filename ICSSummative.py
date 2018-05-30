@@ -403,9 +403,15 @@ def room2():#Where you can level up your pokemon
     print ('1. Swim across the pond')
     print ('2. Walk around the pond')
     command = input()
-    if command =='1':
-        print ('While swimming, you encounter a wild pokemon!')
-        wildencounter()
+    while True:
+        if command =='1':
+            print ('While swimming, you encounter a wild pokemon!')
+            wildencounter()
+            break
+        elif command =='2':
+            break
+        else:
+            print('Enter 1 or 2 exactly!')
     print ('You have safely crossed the swamp!')
     room3()
        
