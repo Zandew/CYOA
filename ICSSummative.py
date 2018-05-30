@@ -214,7 +214,7 @@ increases damage!']
 gameinfo2 = ['You have waken up in a room with no apparent exit other than two doors','You have no idea what \
 has happened, only that you were on your way to the prestigeous Pokemon Academy for \
 your first day of middle school with your very first pokemon.', 'Now, you appear to be in a locked room and only have that \
-pokemon with you to help you escape. While thinking about this situation, you can not help but wonder; why did this happen \
+pokemon with you to help you escape. While thinking about this situation, you can not help but wonder; Why did this happen \
 to me? Where do these doors lead? How could I have ever ended up in this situation...']
         
 class Sidequest():#Determines when the sidequest starts and ends, and gives the reward
