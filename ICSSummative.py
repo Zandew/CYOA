@@ -9,6 +9,9 @@ import time
 import random
 import sys
 
+def pause(n):
+    time.sleep(n)
+
 class pokemon():
 
     def __init__(self, name, maxhp, type):
@@ -231,8 +234,10 @@ class Sidequest():#Determines when the sidequest starts and ends, and gives the 
         starterpokemon.currentsidequest = self
         
     def complete(self):
+        print ('..................................................')
         print ("Congratulations you have completed this sidequest!")
         print ("You have earned the move {}!".format(self.reward))
+        print ('..................................................')        
         starterpokemon.addmove(self.reward)    
     
 def getstarterpokemon():
@@ -334,6 +339,7 @@ def sidequestroom():#Starts a sidequests where you can get a new move
 def ruins():
     print ('You see a treasure chest, but there is a sleeping snorlax sitting on it!')
     print ('Do you...')
+    pause(1)
     print ('1. Attack snorlax with {}'.format(starterpokemon.name))
     print ('2. Look around for another way to move snorlax')
     command = input()
@@ -343,12 +349,14 @@ def ruins():
         print ('Congratulations, you defeated snorlax!')
     elif command == '2':
         print ('You find a mysterious flute and decide to play it')
+        pause(1)
         print ('Snorlax starts sleepwalking and walks away from the chest!')
     print ('You walk up to the treasure chest and open it, you find something!(TBD)')
         
 def room3():
     print ('This room looks like an abandoned city, there is what looks like an entrance to a ruins')
     print ('Do you...')
+    pause(1)
     print ('1. Enter the ruins')
     print ('2. Keep walking on the main track')
     command = input()
@@ -364,7 +372,8 @@ def room1():#Where you can level up your pokemon, then you go into the guard roo
     print('This room has a lot of tall grass, it looks like it contains a lot of wild pokemon.')
     wildencounter()
     print ('You come across a huge hole and the only ways to get across are to walk over an old bridge or to walk around the hole')
-    print ('Do you')
+    print ('Do you...')
+    pause(1)
     print ('1: Take the bridge')
     print ('2: Go around the hole')
     command = input()
@@ -390,6 +399,7 @@ def room2():#Where you can level up your pokemon
     wildencounter()
     print ('You come across a huge pond and you have to get across')
     print ('Do you...')
+    pause(1)
     print ('1. Swim across the pond')
     print ('2. Walk around the pond')
     command = input()
@@ -414,10 +424,12 @@ def pokecenter():#You can heal your pokemon's health and pp here
     if 'yes' in command or 'heal' in command:
     	print ('Hello, and welcome to the Pokémon Center. We will heal your pokemon to full health.')
     	starterpokemon.heal()
+    	pause(1)
     	print ('Please come again!')
         
 def guardroom():#Enters the guard room, starting the first non-wild pokemon battle in the game
     print('This is the guard room! You have to face 3 pokemon back to back!')
+    pause(1)
     guardbattle()
     pokecenter()
     bossbattle()
@@ -426,7 +438,7 @@ def wildencounter():#Starts a wild pokemon battle
     index = random.randint(0, 6)
     wild = wildlist[index]
     print ('A wild {} appeared!'.format(wild.name))
-    time.sleep(1)
+    pause(1)
     battle(starterpokemon, wild)#Starts the battle
     wild.heal()
 
@@ -438,13 +450,13 @@ def guardbattle():#Prints the dialogue for the guards, then starts the battle
 def endingscene():#Prints the dialogue for the ending scene, then ends the game
     for dialogue in endingdialogue:
         print(dialogue)
-        time.sleep(2.5)
+        pause(2)
     sys.exit()        
         
 def bossbattle():#Starts the final battle in the game and the hardest, the boss battle
     for dialogue in bossdialogue:#Prints the dialogue for the bosses
         print (dialogue)
-        time.sleep(2.5)
+        pause(2)
     battle(starterpokemon, boss)#Starts the battle
     endingscene()#When you win, it starts the ending scene
     
@@ -452,9 +464,11 @@ def main():
     global starterpokemon #Makes starterpokemon a global variable used throughout the program
     for dialogue in gameinfo1: #Displays the first lines of text
         print (dialogue)
+        pause(2)
     starterpokemon = getstarterpokemon()#Stores the properties of the starter pokemon
     for dialogue in gameinfo2:#Displays the next lines of text
         print (dialogue)
+        pause(2)
     sidequestroom()#Starts a sidequest
     startingroom()#Starts the game in the starting room
     
