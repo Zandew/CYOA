@@ -205,7 +205,7 @@ If you beat all the guards, you can face the boss!', 'When you beat a pokemon, \
 you level up gaining 3 health points. Other pokemon attack within a range, but \
 your pokemon is special where it can have different attacks that do different \
 damage and effects, but most of these attacks are only available through \
-sidequests.', 'Each pokemon is of a different type. There are grass,fire and water kinds.\
+sidequests. If you type stats when in a battle, you can see the health of both pokemon in battle.', 'Each pokemon is of a different type. There are grass,fire and water types.\
 Grass is super effective on water, water is super effective on fire and fire is \
 super effective on grass! There are also pokemon with no type that are only super \
 effective against other pokemon with no type. Type super effectiveness \
