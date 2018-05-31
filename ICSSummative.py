@@ -66,7 +66,9 @@ class wildpokemon(pokemon):#Determines stats and properties of the wild pokemon
         return round(self.maxattack*0.7)
 
     def attack(self, enemy):
-        attack = random.randint(self.minattack, self.maxattack)-enemy.defense
+        attack = random.randint(self.minattack, self.maxattack)-enemy.defense\
+        if attack<0:
+            attack = 0
         enemy.hp = enemy.hp-attack
         if enemy.hp<=0:
             print ('{} has knocked out {}'.format(self.name, enemy.name))
