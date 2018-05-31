@@ -293,17 +293,17 @@ def battle(pokemon1, pokemon2):#Starts the battle sequence
             sys.exit()
 
 snorlax = wildpokemon('Snorlax', 100, 2, 'None')
-wild1 = wildpokemon('Bidoof', random.randint(30, 40), 8,'None')
-wild2 = wildpokemon('Poliwag', random.randint(40, 45), 7, 'water')
-wild3 = wildpokemon('Magikarp', random.randint(30, 35), 5, 'water')
-wild4 = wildpokemon('Growlithe', random.randint(45, 50), 8, 'fire')
-wild5 = wildpokemon('Vulpix', random.randint(40, 50), 7, 'fire')
-wild6 = wildpokemon('Oddish', random.randint(30, 45), 6, 'grass')
-wild7 = wildpokemon('Tangela', random.randint(40, 50), 7, 'grass')
-guard1 = wildpokemon('Vaporeon', 45, 10, 'water')
-guard2 = wildpokemon('Leafeon', 40, 11, 'grass')
-guard3 = wildpokemon('Flareon', 45, 11, 'fire')
-boss = wildpokemon('Meowth', 55, 14, 'psychic')
+wild1 = wildpokemon('Bidoof', random.randint(10, 40), 8,'None')
+wild2 = wildpokemon('Poliwag', random.randint(20, 45), 7, 'water')
+wild3 = wildpokemon('Magikarp', random.randint(20, 35), 5, 'water')
+wild4 = wildpokemon('Growlithe', random.randint(25, 50), 8, 'fire')
+wild5 = wildpokemon('Vulpix', random.randint(20, 50), 7, 'fire')
+wild6 = wildpokemon('Oddish', random.randint(10, 45), 6, 'grass')
+wild7 = wildpokemon('Tangela', random.randint(20, 50), 7, 'grass')
+guard1 = wildpokemon('Vaporeon', 15, 10, 'water')
+guard2 = wildpokemon('Leafeon', 20, 11, 'grass')
+guard3 = wildpokemon('Flareon', 25, 11, 'fire')
+boss = wildpokemon('Meowth', 35, 14, 'psychic')
 #Above are the pokemon you can encounter
 wildlist = [wild1, wild2, wild3, wild4, wild5, wild6, wild7]
 guardlist = [guard1, guard2, guard3]
