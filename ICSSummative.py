@@ -342,7 +342,7 @@ quest3 = Sidequest(2, toughskin)
 sidequestlist = [quest1, quest2, quest3]
 
 def getsidequest():
-    quest = sidequestlist[random.randint(0, len(sidequestlist))]
+    quest = sidequestlist[random.randint(0, len(sidequestlist)-1)]
     sidequestlist.remove(quest)
     return quest
 
