@@ -86,7 +86,7 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
         if self.type=='water':
             tackle.name = "water gun"
         elif self.type =='fire':
-            tackle.name = "flamethrower"
+            tackle.name = "ember"
         else: 
             tackle.name = "razor leaf"
         self.movenames = [tackle.name, heal.name]
