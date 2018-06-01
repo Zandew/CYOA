@@ -83,6 +83,12 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
         super().__init__(name, maxhp, type)
         self.extraattack = 0
         self.moves = [tackle, heal]
+        if self.type=='water':
+            tackle.name = "water gun"
+        elif self.type =='fire':
+            tackle.name = "flamethrower"
+        else: 
+            tackle.name = "razor leaf"
         self.movenames = [tackle.name, heal.name]
         self.objectives = None
         self.currentsidequest = None
@@ -157,7 +163,6 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
                         elif move.name == "tough skin":
                             print ("{} has increased it's defense!".format(self.name))
                             self.defense += 2
-                            break
                         move.pp -= 1
                         break
                     if move.type == 'charge':
