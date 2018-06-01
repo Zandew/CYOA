@@ -340,8 +340,13 @@ quest2 = Sidequest(2, skullbash)
 quest3 = Sidequest(2, toughskin)
 sidequestlist = [quest1, quest2, quest3]
 
+def getsidequest():
+    quest = sidequestlist[random.randInt(0, len(sidequestlist))]
+    sidequestlist.remove(quest)
+    return quest
+
 def sidequestroom():#Starts a sidequests where you can get a new move
-    quest = sidequestlist[random.randint(0, 2)]
+    quest = getsidequest()
     quest.start()
 
 def ruins():
@@ -360,7 +365,7 @@ def ruins():
         pause(1)
         print ('Snorlax starts sleepwalking and walks away from the chest!')
     print ('You walk up to the treasure chest and open it, you find a sidequest!')
-    quest = sidequestlist[random.randint(0, 2)]
+    quest = getsidequest()
     print('This sidequest rewards you with the move {}!'.format(quest.reward.name))
     print(quest.reward.description)
     answer=input('Do you want to start this sidequest? Y/N WARNING: Accepting this sidequest deletes any current sidequest.')
