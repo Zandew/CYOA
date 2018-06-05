@@ -281,6 +281,7 @@ def battle(pokemon1, pokemon2):#Starts the battle sequence
         print ('{} has a type advantage over {}!'.format(pokemon1.name, pokemon2.name))
     elif is_effective(pokemon2, pokemon1):
         print ('{} has a type advantage over {}!'.format(pokemon2.name, pokemon1.name))
+    print ("TIP: Type 'stats' to see the hp bar of each pokemon!")
     while True:
         x = pokemon1.attack(pokemon2)
         if x==True:
