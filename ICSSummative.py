@@ -53,7 +53,7 @@ heal = specialmove('heal', 'heal', 15, 5)
 swordstance = specialmove("swordstance", "passive", 2, 5, "Increases your attack by 2 for the rest of the battle")
 skullbash = specialmove("skull bash", "charge", 20, 5, "Charge up for 1 turn and deal 20 damage next turn")
 toughskin = specialmove("tough skin", "passive", 2, 5, "Take 2 less damage from the opponent's attack for the rest of the battle")
-
+judgement = basicmove('judgement','damage',14)
 class wildpokemon(pokemon):#Determines stats and properties of the wild pokemon
 
     def __init__(self, name, maxhp, maxattack, type):
@@ -140,7 +140,6 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
             enemy.hp -= self.chargemove.amount
             if enemy.hp<=0:
                 print ("{} has knocked out {}!".format(self.name, enemy.name))
-                self.skipmove False
                 return True
             self.skipmove = False
             return None
@@ -459,7 +458,7 @@ def guardroom():#Enters the guard room, starting the first non-wild pokemon batt
     pause(1)
     guardbattle()
     pokecenter()
-    bossbattle()
+    room4()
 
 def wildencounter():#Starts a wild pokemon battle
     index = random.randint(0, 6)
@@ -486,7 +485,29 @@ def bossbattle():#Starts the final battle in the game and the hardest, the boss 
         pause(2)
     battle(starterpokemon, boss)#Starts the battle
     endingscene()#When you win, it starts the ending scene
-    
+
+def room4():#This maze connects the boss battle to the guard room
+    print("You have found yourself in a maze. You think that the boss will be at the end, but you aren't sure.")
+    runningtotal=0
+    while runningtotal<10:#The maze goes until the running total passes 10
+        room=input("You see 3 rooms in front of you. Which numbered room do you go into?")
+        while room!='1' and room!='2' and room!='3':
+            print('That is not a valid room number!')
+            room=input("You see 3 rooms in front of you. Which numbered room do you go into?")
+        runningtotal+=int(room)
+        if runningtotal%3==0:
+            wildencounter()
+            print('Looks like you need to keep moving.')
+        elif runningtotal%3!=0 and runningtotal!=10:
+            print('There is nothing in this room! Looks like you need to keep moving.')
+    if runningtotal==10: #If the running total ends on 10, your pokemon gets a powerful move
+        starterpokemon.addmove(judgement)
+        print('Your pokemon now knows the strongest basic move, judgement!')
+        print('You can see the boss!')
+    else: #Otherwise, you go straight to the boss
+        print('You found no treasure in this maze, but you can see the boss!')
+    pokecenter()
+    bossbattle()
 def main():
     global starterpokemon #Makes starterpokemon a global variable used throughout the program
     for dialogue in gameinfo1: #Displays the first lines of text
@@ -500,4 +521,3 @@ def main():
     startingroom()#Starts the game in the starting room
     
 main()#Starts the prologue
-
