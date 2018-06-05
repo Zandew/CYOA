@@ -140,6 +140,7 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
             enemy.hp -= self.chargemove.amount
             if enemy.hp<=0:
                 print ("{} has knocked out {}!".format(self.name, enemy.name))
+                self.skipmove = False
                 return True
             self.skipmove = False
             return None
@@ -182,7 +183,6 @@ class starter_pokemon(pokemon):#Configures stats and properties of the starter p
                 enemy.hp = enemy.hp-attack
                 if enemy.hp<=0:
                     print ('{} has knocked out {}'.format(self.name, enemy.name))
-                    self.skipmove = False
                     return True
                 else:
                     print ('{} has attacked {} for {} damage'.format(self.name, enemy.name, attack))
