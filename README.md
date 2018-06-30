@@ -5,3 +5,5 @@ You take sidequests from an NPC. These can be finding a pokemon or exploring an 
 Schedule: Complete story-May 25th Complete sidequests-June 1st Complete Battling system-June 1st
 Flowchart:  
 You first start in the starting room. You have your first pokemon, and you have the choice to go through two rooms. One room brings you back to the start after battling a wild pokemon, while the other room has you battle a wild pokemon and then you can heal fully at a pokemon centre. Then, you have to face a guard battle, facing 3 guard pokemon at once. After, you can heal fully at the pokemon centre to face the final boss battle, which is the final battle in the game. Throughout the game you will make decisions on how to get through each room.
+
+ICSSUMMATIVE.PY FOR COMPLETE SOURCE CODE
